@@ -290,6 +290,10 @@
       animation: popInLogo 1.2s cubic-bezier(.61,.16,.19,1.09) 0.3s;
       animation-fill-mode: backwards;
     }
+    .splash__logo img {
+      height: 60px;
+      width: auto;
+    }
     @keyframes popInLogo {
       0% {transform: scale(0.2) rotate(-40deg); opacity:0.2;}
       60% {transform: scale(1.15) rotate(8deg) ; opacity:1;}
@@ -381,6 +385,10 @@
       font-size: 1.4rem;
       font-weight: 600;
       color: var(--color-primary);
+    }
+    .logo img {
+      height: 32px;
+      width: auto;
     }
     .nav-menu {
       display: flex;
@@ -685,7 +693,7 @@
 <body>
   <!-- Splash screen -->
   <div class="splash" id="splash">
-    <div class="splash__logo" aria-label="AarogyaSathi Health Locker"><img src="logo.png" alt="AarogyaSathi" style="height:60px;width:auto;"/></div>
+    <div class="splash__logo" aria-label="AarogyaSathi Health Locker"><img src="logo.png" alt="AarogyaSathi"/></div>
     <div class="splash__title">AarogyaSathi</div>
     <div class="splash__tagline">Your Health, Your Privacy, Your Control</div>
     <div class="splash__loader" role="status" aria-label="Loading"></div>
@@ -1503,7 +1511,7 @@
       const dict = LANGDICT[_lang] || LANGDICT.en;
       root.innerHTML = `
         <header class="auth-header flex justify-between items-center px-16 py-16">
-          <a href="#" onclick="showHomepage()" style="text-decoration:none;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:1.3rem;font-weight:600;color:var(--primary);"><img src="logo.png" alt="AarogyaSathi" style="height:32px;width:auto;"/> ${APP_COMPANY.name}</a>
+          <a href="#" onclick="showHomepage()" style="text-decoration:none;cursor:pointer;" class="logo"><img src="logo.png" alt="AarogyaSathi"/> ${APP_COMPANY.name}</a>
           <div>${renderLangSelector()}</div>
         </header>
         <main class="flex flex-col items-center justify-center" style="min-height:70vh;">
@@ -1851,10 +1859,10 @@
     function renderDashHeader() {
       const dict = LANGDICT[_lang]||LANGDICT.en;
       return `<header class="flex justify-between items-center px-16 py-16" style="background:var(--color-surface);position:sticky;top:0;z-index:4;border-bottom:1px solid var(--color-border);">
-        <a href="#" onclick="showHomepage()" style="text-decoration:none;cursor:pointer;" class="flex items-center gap-8">
-          <img src="logo.png" alt="AarogyaSathi" style="height:32px;width:auto;margin-right:4px;"/> <b>${APP_COMPANY.name}</b>
-          <span class="status status--success ml-8" style="margin-left:16px;font-size:12px;">SSL &#128274;</span>
-        </a>
+        <div class="flex items-center gap-8">
+          <a href="#" onclick="showHomepage()" style="text-decoration:none;cursor:pointer;" class="logo"><img src="logo.png" alt="AarogyaSathi"/> <b>${APP_COMPANY.name}</b></a>
+          <span class="status status--success" style="font-size:12px;">SSL &#128274;</span>
+        </div>
         <div class="flex items-center gap-8">
           ${renderLangSelector()}
           <a href="#" class="btn btn--outline btn--sm" onclick="showUserProfile()">${(_user && _user.avatar) ? _user.avatar+'&nbsp;' : ''}${_user && _user.name}</a>
