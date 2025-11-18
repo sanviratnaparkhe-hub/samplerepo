@@ -1503,7 +1503,7 @@
       const dict = LANGDICT[_lang] || LANGDICT.en;
       root.innerHTML = `
         <header class="auth-header flex justify-between items-center px-16 py-16">
-          <div class="flex items-center" style="gap:6px;font-size:1.3rem;font-weight:600;color:var(--primary)">🩺 ${APP_COMPANY.name}</div>
+          <a href="#" onclick="showHomepage()" style="text-decoration:none;cursor:pointer;" class="flex items-center" style="gap:6px;font-size:1.3rem;font-weight:600;color:var(--primary)">🩺 ${APP_COMPANY.name}</a>
           <div>${renderLangSelector()}</div>
         </header>
         <main class="flex flex-col items-center justify-center" style="min-height:70vh;">
@@ -1545,6 +1545,9 @@
               </div>
               <div class="mt-8" style="text-align:center;font-size:13px;">
                 ${type==="login"? dict.signup+`? <a href="#" onclick="showAuthScreen('signup')">${dict.signup}</a>`: dict.login+`? <a href="#" onclick="showAuthScreen('login')">${dict.login}</a>`}
+                <div style="margin-top:12px;border-top:1px solid var(--color-border);padding-top:12px;">
+                  <a href="#" onclick="showHomepage()" style="color:var(--color-text-secondary);">← Back to Home</a>
+                </div>
               </div>
             </div>
           </div>
@@ -1848,10 +1851,10 @@
     function renderDashHeader() {
       const dict = LANGDICT[_lang]||LANGDICT.en;
       return `<header class="flex justify-between items-center px-16 py-16" style="background:var(--color-surface);position:sticky;top:0;z-index:4;border-bottom:1px solid var(--color-border);">
-        <div class="flex items-center gap-8">
+        <a href="#" onclick="showHomepage()" style="text-decoration:none;cursor:pointer;" class="flex items-center gap-8">
           <span style="font-size:1.2em;color:var(--primary);margin-right:4px;">🩺</span> <b>${APP_COMPANY.name}</b>
           <span class="status status--success ml-8" style="margin-left:16px;font-size:12px;">SSL &#128274;</span>
-        </div>
+        </a>
         <div class="flex items-center gap-8">
           ${renderLangSelector()}
           <a href="#" class="btn btn--outline btn--sm" onclick="showUserProfile()">${(_user && _user.avatar) ? _user.avatar+'&nbsp;' : ''}${_user && _user.name}</a>
