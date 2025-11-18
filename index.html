@@ -256,7 +256,97 @@
     .table { border-collapse: collapse; }
     .table th, .table td { padding: var(--space-8); text-align: left; border-bottom: 1px solid var(--color-border); }
 
-    /* Splash Screen removed - shows homepage directly */
+    /* Splash Screen Styles */
+    .splash {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 10000;
+      background: linear-gradient(135deg, var(--primary), var(--secondary) 90%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s;
+      opacity: 1;
+      will-change: opacity;
+      color: #fff;
+      font-family: var(--font-family-base);
+    }
+    .splash.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .splash__logo {
+      width: 110px;
+      height: 110px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 24px 0 #0066cc33;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      animation: popInLogo 1.2s cubic-bezier(.61,.16,.19,1.09) 0.3s;
+      animation-fill-mode: backwards;
+    }
+    @keyframes popInLogo {
+      0% {transform: scale(0.2) rotate(-40deg); opacity:0.2;}
+      60% {transform: scale(1.15) rotate(8deg) ; opacity:1;}
+      100% {transform: scale(1) rotate(0deg);}
+    }
+    .splash__title {
+      font-size: 2.1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      letter-spacing: 1.2px;
+      text-shadow: 0 1px 8px #0066cc44;
+      animation: fadeUp 1s cubic-bezier(.61,.16,.19,1.09) 0.8s;
+      animation-fill-mode: backwards;
+    }
+    .splash__tagline {
+      font-size: 1.1rem;
+      font-weight: 500;
+      opacity: 0.95;
+      letter-spacing: 0.6px;
+      text-align: center;
+      animation: fadeUp 1.1s cubic-bezier(.61,.16,.19,1.09) 1.1s;
+      animation-fill-mode: backwards;
+    }
+    @keyframes fadeUp {
+      0% {opacity: 0; transform: translateY(18px);}
+      100% {opacity: 1; transform: none;}
+    }
+    .splash__loader {
+      margin-top:32px;
+      width:46px; height:6px;
+      border-radius:3px;
+      background: linear-gradient(90deg, #fff2 0%, #fff9 40%, #fff2 100%);
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 1s 1.8s;
+      animation-fill-mode: backwards;
+      opacity:0.86;
+      box-shadow: 0 0 8px #fff5;
+    }
+    .splash__loader::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: -38px; top: 0;
+      height: 6px; width: 42px;
+      background: linear-gradient(90deg, #fff8 0%, #fff 45%, #fff8 100%);
+      animation: loaderGlide 2.1s infinite cubic-bezier(.61,.16,.19,1.09);
+    }
+    @keyframes loaderGlide {
+      0% {left: -40px;}
+      88% {left: 42px;}
+      100% {left: 42px;}
+    }
+    @media (max-width: 480px) {
+      .splash__logo { width: 82px; height: 82px; font-size:40px; }
+      .splash__title { font-size: 1.5rem; }
+    }
     /* App Main general override for dark bg */
     body {
       background: var(--color-background);
@@ -593,8 +683,16 @@
   </style>
 </head>
 <body>
+  <!-- Splash screen -->
+  <div class="splash" id="splash">
+    <div class="splash__logo" aria-label="AarogyaSathi Health Locker">🩺</div>
+    <div class="splash__title">AarogyaSathi</div>
+    <div class="splash__tagline">Your Health, Your Privacy, Your Control</div>
+    <div class="splash__loader" role="status" aria-label="Loading"></div>
+  </div>
+
   <!-- Main App root -->
-  <div id="app-root"></div>
+  <div id="app-root" style="display:none;"></div>
 
   <script>
     // Global App Data
@@ -1134,6 +1232,17 @@
       } else {
         showDashboard(_user.role);
       }
+    }
+
+    // Hide splash screen and show app
+    function hideSplashShowApp() {
+      const splash = document.getElementById('splash');
+      splash.classList.add('hide');
+      setTimeout(()=>{
+        splash.style.display='none';
+        document.getElementById('app-root').style.display = '';
+        initApp();
+      }, 900);
     }
 
     // --------- HOMEPAGE ---------
@@ -1796,8 +1905,8 @@
         showAuthScreen('login');
       }
     }
-    // ------------- INIT: Load app immediately ------------
-    initApp();
+    // ------------- INIT: Run splash, then load homepage or dashboard -----------
+    setTimeout(hideSplashShowApp, 2300 + Math.random()*1200);
   </script>
 </body>
 </html>
