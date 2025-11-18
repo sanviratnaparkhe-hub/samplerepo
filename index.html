@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,10 @@
   <meta name="description" content="AI-powered Digital Health Locker - AarogyaSathi.in" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><text y='40' font-size='40'>🩺</text></svg>" />
   <style>
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
     :root {
       --primary: #0066cc;
       --secondary: #20b2aa;
@@ -347,19 +352,340 @@
     body {
       background: var(--color-background);
     }
+
+    /* Homepage Styles */
+    .homepage {
+      width: 100%;
+      overflow-x: hidden;
+    }
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-16) var(--space-24);
+      backdrop-filter: blur(10px);
+    }
+    .header-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-16);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+    .nav-menu {
+      display: flex;
+      gap: var(--space-24);
+      align-items: center;
+    }
+    .nav-menu a {
+      font-weight: 500;
+      transition: color var(--duration-fast);
+    }
+    .header-actions {
+      display: flex;
+      gap: var(--space-12);
+      align-items: center;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0066cc 0%, #20b2aa 100%);
+      color: white;
+      padding: 80px var(--space-24) 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: var(--space-16);
+      color: white;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: var(--space-32);
+      opacity: 0.95;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: var(--space-16);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-hero {
+      padding: var(--space-12) var(--space-32);
+      font-size: 1.1rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+    }
+    .btn-white {
+      background: white;
+      color: var(--primary);
+    }
+    .btn-white:hover {
+      background: rgba(255,255,255,0.9);
+      color: var(--primary);
+    }
+    .btn-outline-white {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .section {
+      padding: 80px var(--space-24);
+    }
+    .section-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: var(--space-16);
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-32);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-24);
+      margin-top: var(--space-32);
+    }
+    .feature-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-24);
+      text-align: center;
+      transition: all var(--duration-normal);
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-16);
+    }
+    .feature-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: var(--space-8);
+    }
+    .feature-desc {
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-32);
+      margin-top: var(--space-32);
+    }
+    .step-card {
+      text-align: center;
+      position: relative;
+    }
+    .step-number {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto var(--space-16);
+    }
+    .step-icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-12);
+    }
+    .step-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: var(--space-8);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-24);
+      margin-top: var(--space-32);
+    }
+    .testimonial-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-card-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-24);
+    }
+    .testimonial-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-16);
+    }
+    .testimonial-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: var(--space-16);
+      line-height: 1.6;
+    }
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+    .testimonial-role {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-24);
+      margin-top: var(--space-32);
+    }
+    .gallery-item {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--color-surface);
+      border: 1px solid var(--color-card-border);
+      transition: transform var(--duration-normal);
+    }
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-lg);
+    }
+    .gallery-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .gallery-caption {
+      padding: var(--space-16);
+    }
+    .gallery-title {
+      font-weight: 600;
+      margin-bottom: var(--space-4);
+    }
+    .gallery-desc {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+    }
+    .trust-section {
+      background: var(--color-bg-1);
+    }
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-32);
+      flex-wrap: wrap;
+      margin-top: var(--space-24);
+    }
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .badge-icon {
+      font-size: 1.8rem;
+    }
+    .cta-section {
+      background: linear-gradient(135deg, #20b2aa 0%, #27ae60 100%);
+      color: white;
+      padding: 60px var(--space-24);
+      text-align: center;
+    }
+    .cta-section h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: var(--space-24);
+    }
+    .cta-buttons {
+      display: flex;
+      gap: var(--space-16);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: 60px var(--space-24) var(--space-24);
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-32);
+      margin-bottom: var(--space-32);
+    }
+    .footer-section h4 {
+      margin-bottom: var(--space-16);
+    }
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-links li {
+      margin-bottom: var(--space-8);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: var(--space-24);
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.1rem; }
+      .section-title { font-size: 1.8rem; }
+      .nav-menu { display: none; }
+      .header-actions { flex-wrap: wrap; }
+    }
   </style>
 </head>
 <body>
-  <!-- Splash screen -->
-  <div class="splash" id="splash">
-    <div class="splash__logo" aria-label="AarogyaSathi Health Locker">🩺</div>
-    <div class="splash__title">AarogyaSathi</div>
-    <div class="splash__tagline">Your Health, Your Privacy, Your Control</div>
-    <div class="splash__loader" role="status" aria-label="Loading"></div>
-  </div>
-
   <!-- Main App root -->
-  <div id="app-root" style="display:none;"></div>
+  <div id="app-root"></div>
 
   <script>
     // Global App Data
@@ -393,6 +719,454 @@
       { id: "R001", name: "Blood Test Report - Oct 2025", type: "Lab", date: "2025-10-15", folder: "Lab Tests", shared: false },
       { id: "R002", name: "Prescription - Diabetes", type: "Prescription", date: "2025-10-20", folder: "Prescriptions", shared: true },
     ];
+    // Homepage content translations
+    const HOMEPAGE_CONTENT = {
+      en: {
+        nav_home: 'Home',
+        nav_features: 'Features',
+        nav_about: 'About',
+        nav_contact: 'Contact',
+        hero_title: 'Your Health, Your Privacy, Your Control',
+        hero_subtitle: 'AI-Powered Digital Health Locker for India',
+        cta_get_started: 'Get Started',
+        cta_learn_more: 'Learn More',
+        features_title: 'Key Features',
+        features_subtitle: 'Everything you need to manage your health records securely',
+        feature_secure: 'Secure Storage',
+        feature_secure_desc: 'End-to-end encrypted health records',
+        feature_sharing: 'Easy Sharing',
+        feature_sharing_desc: 'Share records with doctors & providers with consent',
+        feature_multilang: 'Multi-language',
+        feature_multilang_desc: 'Available in 6 Indian languages',
+        feature_access: 'Instant Access',
+        feature_access_desc: 'Access your records anytime, anywhere',
+        feature_insurance: 'Insurance Ready',
+        feature_insurance_desc: 'Seamless insurance claim processing',
+        feature_privacy: 'Privacy First',
+        feature_privacy_desc: 'Your data, your control',
+        how_title: 'How It Works',
+        how_subtitle: 'Get started in 4 simple steps',
+        step1_title: 'Sign Up',
+        step1_desc: 'Create your account in minutes',
+        step2_title: 'Upload Records',
+        step2_desc: 'Upload your health documents',
+        step3_title: 'Share & Consent',
+        step3_desc: 'Grant access with your permission',
+        step4_title: 'Access Anytime',
+        step4_desc: 'Your records, always with you',
+        testimonials_title: 'Trusted by Healthcare Professionals',
+        testimonials_subtitle: 'See what our users say',
+        testimonial_patient_quote: 'I can now manage all my health records in one place',
+        testimonial_patient_author: 'राज कुमार',
+        testimonial_patient_role: 'Patient',
+        testimonial_doctor_quote: 'Easy access to patient records with proper consent',
+        testimonial_doctor_author: 'Dr. Priya Singh',
+        testimonial_doctor_role: 'Doctor',
+        testimonial_insurance_quote: 'Faster claim processing with digital documents',
+        testimonial_insurance_author: 'ABC Insurance',
+        testimonial_insurance_role: 'Insurance Provider',
+        gallery_title: 'Meet Our Network',
+        gallery_subtitle: 'Healthcare providers, patients, and insurance companies trust AarogyaSathi',
+        gallery1_title: 'Doctor Consultation',
+        gallery1_desc: 'Professional healthcare providers accessing patient data',
+        gallery2_title: 'Digital Health Technology',
+        gallery2_desc: 'AI-powered health management interface',
+        gallery3_title: 'Healthcare Team Collaboration',
+        gallery3_desc: 'Seamless coordination between providers',
+        gallery4_title: 'Medical Records Management',
+        gallery4_desc: 'Secure organization of health documents',
+        trust_title: 'Security & Privacy',
+        trust_subtitle: 'Your health data is your property. We protect it with industry-leading security.',
+        trust_iso: 'ISO Certified',
+        trust_hipaa: 'HIPAA Compliant',
+        trust_encrypted: 'End-to-End Encrypted',
+        cta_title: 'Ready to Take Control of Your Health?',
+        cta_signup: 'Sign Up Now',
+        cta_demo: 'Schedule Demo',
+        footer_company: 'Company',
+        footer_product: 'Product',
+        footer_legal: 'Legal',
+        footer_features: 'Features',
+        footer_blog: 'Blog',
+        footer_contact: 'Contact',
+        footer_careers: 'Careers',
+        footer_privacy: 'Privacy Policy',
+        footer_terms: 'Terms of Service',
+        footer_hipaa: 'HIPAA Notice',
+        footer_copyright: '© 2025 AarogyaSathi. All rights reserved.'
+      },
+      hi: {
+        nav_home: 'होम',
+        nav_features: 'विशेषताएं',
+        nav_about: 'हमारे बारे में',
+        nav_contact: 'संपर्क करें',
+        hero_title: 'आपका स्वास्थ्य, आपकी गोपनीयता, आपका नियंत्रण',
+        hero_subtitle: 'भारत के लिए एआई-संचालित डिजिटल हेल्थ लॉकर',
+        cta_get_started: 'शुरू करें',
+        cta_learn_more: 'और जानें',
+        features_title: 'मुख्य विशेषताएं',
+        features_subtitle: 'अपने स्वास्थ्य रिकॉर्ड को सुरक्षित रूप से प्रबंधित करने के लिए आवश्यक सब कुछ',
+        feature_secure: 'सुरक्षित संग्रहण',
+        feature_secure_desc: 'एंड-टू-एंड एन्क्रिप्टेड स्वास्थ्य रिकॉर्ड',
+        feature_sharing: 'आसान साझाकरण',
+        feature_sharing_desc: 'सहमति से डॉक्टरों और प्रदाताओं के साथ रिकॉर्ड साझा करें',
+        feature_multilang: 'बहुभाषी',
+        feature_multilang_desc: '6 भारतीय भाषाओं में उपलब्ध',
+        feature_access: 'तत्काल पहुंच',
+        feature_access_desc: 'कभी भी, कहीं भी अपने रिकॉर्ड तक पहुंचें',
+        feature_insurance: 'बीमा के लिए तैयार',
+        feature_insurance_desc: 'निर्बाध बीमा दावा प्रसंस्करण',
+        feature_privacy: 'गोपनीयता पहले',
+        feature_privacy_desc: 'आपका डेटा, आपका नियंत्रण',
+        how_title: 'यह कैसे काम करता है',
+        how_subtitle: '4 सरल चरणों में शुरू करें',
+        step1_title: 'साइन अप करें',
+        step1_desc: 'मिनटों में अपना खाता बनाएं',
+        step2_title: 'रिकॉर्ड अपलोड करें',
+        step2_desc: 'अपने स्वास्थ्य दस्तावेज़ अपलोड करें',
+        step3_title: 'साझा करें और सहमति दें',
+        step3_desc: 'अपनी अनुमति से पहुंच प्रदान करें',
+        step4_title: 'कभी भी पहुंचें',
+        step4_desc: 'आपके रिकॉर्ड, हमेशा आपके साथ',
+        testimonials_title: 'स्वास्थ्य पेशेवरों द्वारा विश्वसनीय',
+        testimonials_subtitle: 'देखें हमारे उपयोगकर्ता क्या कहते हैं',
+        testimonial_patient_quote: 'मैं अब अपने सभी स्वास्थ्य रिकॉर्ड एक जगह प्रबंधित कर सकता हूं',
+        testimonial_patient_author: 'राज कुमार',
+        testimonial_patient_role: 'रोगी',
+        testimonial_doctor_quote: 'उचित सहमति के साथ रोगी रिकॉर्ड तक आसान पहुंच',
+        testimonial_doctor_author: 'डॉ. प्रिया सिंह',
+        testimonial_doctor_role: 'डॉक्टर',
+        testimonial_insurance_quote: 'डिजिटल दस्तावेजों के साथ तेज़ दावा प्रसंस्करण',
+        testimonial_insurance_author: 'एबीसी बीमा',
+        testimonial_insurance_role: 'बीमा प्रदाता',
+        gallery_title: 'हमारा नेटवर्क',
+        gallery_subtitle: 'स्वास्थ्य सेवा प्रदाता, रोगी और बीमा कंपनियां आरोग्यसाथी पर भरोसा करती हैं',
+        gallery1_title: 'डॉक्टर परामर्श',
+        gallery1_desc: 'पेशेवर स्वास्थ्य सेवा प्रदाता रोगी डेटा तक पहुंच',
+        gallery2_title: 'डिजिटल स्वास्थ्य प्रौद्योगिकी',
+        gallery2_desc: 'एआई-संचालित स्वास्थ्य प्रबंधन इंटरफ़ेस',
+        gallery3_title: 'स्वास्थ्य देखभाल टीम सहयोग',
+        gallery3_desc: 'प्रदाताओं के बीच निर्बाध समन्वय',
+        gallery4_title: 'चिकित्सा रिकॉर्ड प्रबंधन',
+        gallery4_desc: 'स्वास्थ्य दस्तावेजों का सुरक्षित संगठन',
+        trust_title: 'सुरक्षा और गोपनीयता',
+        trust_subtitle: 'आपका स्वास्थ्य डेटा आपकी संपत्ति है। हम इसे उद्योग-अग्रणी सुरक्षा से सुरक्षित रखते हैं।',
+        trust_iso: 'आईएसओ प्रमाणित',
+        trust_hipaa: 'एचआईपीएए अनुपालन',
+        trust_encrypted: 'एंड-टू-एंड एन्क्रिप्टेड',
+        cta_title: 'अपने स्वास्थ्य का नियंत्रण लेने के लिए तैयार हैं?',
+        cta_signup: 'अभी साइन अप करें',
+        cta_demo: 'डेमो शेड्यूल करें',
+        footer_company: 'कंपनी',
+        footer_product: 'उत्पाद',
+        footer_legal: 'कानूनी',
+        footer_features: 'विशेषताएं',
+        footer_blog: 'ब्लॉग',
+        footer_contact: 'संपर्क करें',
+        footer_careers: 'करियर',
+        footer_privacy: 'गोपनीयता नीति',
+        footer_terms: 'सेवा की शर्तें',
+        footer_hipaa: 'एचआईपीएए नोटिस',
+        footer_copyright: '© 2025 आरोग्यसाथी। सर्वाधिकार सुरक्षित।'
+      },
+      ta: {
+        nav_home: 'முகப்பு',
+        nav_features: 'அம்சங்கள்',
+        nav_about: 'எங்களை பற்றி',
+        nav_contact: 'தொடர்பு',
+        hero_title: 'உங்கள் சுகாதாரம், உங்கள் தனியுரிமை, உங்கள் கட்டுப்பாடு',
+        hero_subtitle: 'இந்தியாவிற்கான AI-இயங்கும் டிஜிட்டல் சுகாதார பதிவகம்',
+        cta_get_started: 'தொடங்குங்கள்',
+        cta_learn_more: 'மேலும் அறிக',
+        features_title: 'முக்கிய அம்சங்கள்',
+        features_subtitle: 'உங்கள் சுகாதார பதிவுகளை பாதுகாப்பாக நிர்வகிக்க தேவையான அனைத்தும்',
+        feature_secure: 'பாதுகாப்பான சேமிப்பு',
+        feature_secure_desc: 'முடிவு முதல் முடிவு வரை குறியாக்கம் செய்யப்பட்ட சுகாதார பதிவுகள்',
+        feature_sharing: 'எளிதான பகிர்வு',
+        feature_sharing_desc: 'ஒப்புதலுடன் மருத்துவர்கள் மற்றும் வழங்குநர்களுடன் பதிவுகளை பகிரவும்',
+        feature_multilang: 'பல மொழி',
+        feature_multilang_desc: '6 இந்திய மொழிகளில் கிடைக்கிறது',
+        feature_access: 'உடனடி அணுகல்',
+        feature_access_desc: 'எப்போதும், எங்கும் உங்கள் பதிவுகளை அணுகவும்',
+        feature_insurance: 'காப்பீடு தயார்',
+        feature_insurance_desc: 'தடையற்ற காப்பீடு கோரிக்கை செயலாக்கம்',
+        feature_privacy: 'தனியுரிமை முதலில்',
+        feature_privacy_desc: 'உங்கள் தரவு, உங்கள் கட்டுப்பாடு',
+        how_title: 'இது எவ்வாறு செயல்படுகிறது',
+        how_subtitle: '4 எளிய படிகளில் தொடங்குங்கள்',
+        step1_title: 'பதிவு செய்யவும்',
+        step1_desc: 'நிமிடங்களில் உங்கள் கணக்கை உருவாக்கவும்',
+        step2_title: 'பதிவுகளை பதிவேற்றவும்',
+        step2_desc: 'உங்கள் சுகாதார ஆவணங்களை பதிவேற்றவும்',
+        step3_title: 'பகிர்ந்து ஒப்புதல் அளிக்கவும்',
+        step3_desc: 'உங்கள் அனுமதியுடன் அணுகலை வழங்கவும்',
+        step4_title: 'எப்போதும் அணுகவும்',
+        step4_desc: 'உங்கள் பதிவுகள், எப்போதும் உங்களுடன்',
+        testimonials_title: 'சுகாதார நிபுணர்களால் நம்பப்படுகிறது',
+        testimonials_subtitle: 'எங்கள் பயனர்கள் என்ன சொல்கிறார்கள் என்பதைப் பார்க்கவும்',
+        testimonial_patient_quote: 'நான் இப்போது எனது அனைத்து சுகாதார பதிவுகளையும் ஒரே இடத்தில் நிர்வகிக்க முடியும்',
+        testimonial_patient_author: 'ராஜ் குமார்',
+        testimonial_patient_role: 'நோயாளி',
+        testimonial_doctor_quote: 'சரியான ஒப்புதலுடன் நோயாளி பதிவுகளுக்கு எளிதான அணுகல்',
+        testimonial_doctor_author: 'டாக்டர். பிரியா சிங்',
+        testimonial_doctor_role: 'மருத்துவர்',
+        testimonial_insurance_quote: 'டிஜிட்டல் ஆவணங்களுடன் வேகமான கோரிக்கை செயலாக்கம்',
+        testimonial_insurance_author: 'ஏபிசி காப்பீடு',
+        testimonial_insurance_role: 'காப்பீடு வழங்குநர்',
+        gallery_title: 'எங்கள் வலையமைப்பு',
+        gallery_subtitle: 'சுகாதார வழங்குநர்கள், நோயாளிகள் மற்றும் காப்பீடு நிறுவனங்கள் ஆரோக்யசாதியை நம்புகின்றன',
+        gallery1_title: 'மருத்துவர் ஆலோசனை',
+        gallery1_desc: 'தொழில்முறை சுகாதார வழங்குநர்கள் நோயாளி தரவை அணுகுகிறார்கள்',
+        gallery2_title: 'டிஜிட்டல் சுகாதார தொழில்நுட்பம்',
+        gallery2_desc: 'AI-இயங்கும் சுகாதார மேலாண்மை இடைமுகம்',
+        gallery3_title: 'சுகாதார குழு ஒத்துழைப்பு',
+        gallery3_desc: 'வழங்குநர்களிடையே தடையற்ற ஒருங்கிணைப்பு',
+        gallery4_title: 'மருத்துவ பதிவுகள் மேலாண்மை',
+        gallery4_desc: 'சுகாதார ஆவணங்களின் பாதுகாப்பான அமைப்பு',
+        trust_title: 'பாதுகாப்பு மற்றும் தனியுரிமை',
+        trust_subtitle: 'உங்கள் சுகாதார தரவு உங்கள் சொத்து. நாங்கள் அதை தொழில்துறை-முன்னணி பாதுகாப்புடன் பாதுகாக்கிறோம்.',
+        trust_iso: 'ISO சான்றளிக்கப்பட்டது',
+        trust_hipaa: 'HIPAA இணக்கமானது',
+        trust_encrypted: 'முடிவு முதல் முடிவு வரை குறியாக்கம்',
+        cta_title: 'உங்கள் சுகாதாரத்தின் கட்டுப்பாட்டை எடுக்க தயாரா?',
+        cta_signup: 'இப்போது பதிவு செய்யவும்',
+        cta_demo: 'டெமோ திட்டமிடவும்',
+        footer_company: 'நிறுவனம்',
+        footer_product: 'தயாரிப்பு',
+        footer_legal: 'சட்டபூர்வமான',
+        footer_features: 'அம்சங்கள்',
+        footer_blog: 'வலைப்பதிவு',
+        footer_contact: 'தொடர்பு',
+        footer_careers: 'வாழ்க்கை',
+        footer_privacy: 'தனியுரிமை கொள்கை',
+        footer_terms: 'சேவை விதிமுறைகள்',
+        footer_hipaa: 'HIPAA அறிவிப்பு',
+        footer_copyright: '© 2025 ஆரோக்யசாதி. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.'
+      },
+      te: {
+        nav_home: 'హోమ్',
+        nav_features: 'ఫీచర్లు',
+        nav_about: 'మా గురించి',
+        nav_contact: 'సంప్రదించండి',
+        hero_title: 'మీ ఆరోగ్యం, మీ గోప్యత, మీ నియంత్రణ',
+        hero_subtitle: 'భారతదేశం కోసం AI-ఆధారిత డిజిటల్ హెల్త్ లాకర్',
+        cta_get_started: 'ప్రారంభించండి',
+        cta_learn_more: 'మరింత తెలుసుకోండి',
+        features_title: 'ముఖ్య లక్షణాలు',
+        features_subtitle: 'మీ ఆరోగ్య రికార్డులను సురక్షితంగా నిర్వహించడానికి అవసరమైన ప్రతిదీ',
+        feature_secure: 'సురక్షిత నిల్వ',
+        feature_secure_desc: 'ఎండ్-టు-ఎండ్ ఎన్క్రిప్టెడ్ హెల్త్ రికార్డులు',
+        feature_sharing: 'సులభమైన షేరింగ్',
+        feature_sharing_desc: 'సమ్మతితో వైద్యులు & ప్రొవైడర్లతో రికార్డులను షేర్ చేయండి',
+        feature_multilang: 'బహుభాషా',
+        feature_multilang_desc: '6 భారతీయ భాషలలో అందుబాటులో',
+        feature_access: 'తక్షణ యాక్సెస్',
+        feature_access_desc: 'ఎప్పుడైనా, ఎక్కడైనా మీ రికార్డులను యాక్సెస్ చేయండి',
+        feature_insurance: 'బీమా సిద్ధం',
+        feature_insurance_desc: 'సజావుగా బీమా క్లెయిమ్ ప్రాసెసింగ్',
+        feature_privacy: 'ప్రైవసీ మొదట',
+        feature_privacy_desc: 'మీ డేటా, మీ నియంత్రణ',
+        how_title: 'ఇది ఎలా పనిచేస్తుంది',
+        how_subtitle: '4 సులభమైన దశల్లో ప్రారంభించండి',
+        step1_title: 'సైన్ అప్',
+        step1_desc: 'నిమిషాల్లో మీ ఖాతాను సృష్టించండి',
+        step2_title: 'రికార్డులు అప్లోడ్ చేయండి',
+        step2_desc: 'మీ ఆరోగ్య పత్రాలను అప్లోడ్ చేయండి',
+        step3_title: 'షేర్ & సమ్మతి',
+        step3_desc: 'మీ అనుమతితో యాక్సెస్ ఇవ్వండి',
+        step4_title: 'ఎప్పుడైనా యాక్సెస్',
+        step4_desc: 'మీ రికార్డులు, ఎల్లప్పుడూ మీతో',
+        testimonials_title: 'ఆరోగ్య నిపుణులచే విశ్వసనీయం',
+        testimonials_subtitle: 'మా వినియోగదారులు ఏమి చెబుతున్నారో చూడండి',
+        testimonial_patient_quote: 'నేను ఇప్పుడు నా అన్ని ఆరోగ్య రికార్డులను ఒకే చోట నిర్వహించగలను',
+        testimonial_patient_author: 'రాజ్ కుమార్',
+        testimonial_patient_role: 'రోగి',
+        testimonial_doctor_quote: 'సరైన సమ్మతితో పేషెంట్ రికార్డులకు సులభమైన యాక్సెస్',
+        testimonial_doctor_author: 'డాక్టర్. ప్రియా సింగ్',
+        testimonial_doctor_role: 'డాక్టర్',
+        testimonial_insurance_quote: 'డిజిటల్ డాక్యుమెంట్లతో వేగవంతమైన క్లెయిమ్ ప్రాసెసింగ్',
+        testimonial_insurance_author: 'ABC బీమా',
+        testimonial_insurance_role: 'బీమా ప్రొవైడర్',
+        gallery_title: 'మా నెట్వర్క్',
+        gallery_subtitle: 'హెల్త్‌కేర్ ప్రొవైడర్లు, రోగులు మరియు బీమా కంపెనీలు ఆరోగ్యసాథిని నమ్ముతున్నారు',
+        gallery1_title: 'డాక్టర్ కన్సల్టేషన్',
+        gallery1_desc: 'ప్రొఫెషనల్ హెల్త్‌కేర్ ప్రొవైడర్లు పేషెంట్ డేటాను యాక్సెస్ చేస్తున్నారు',
+        gallery2_title: 'డిజిటల్ హెల్త్ టెక్నాలజీ',
+        gallery2_desc: 'AI-ఆధారిత ఆరోగ్య నిర్వహణ ఇంటర్‌ఫేస్',
+        gallery3_title: 'హెల్త్‌కేర్ టీమ్ కోలాబరేషన్',
+        gallery3_desc: 'ప్రొవైడర్ల మధ్య సజావుగా సమన్వయం',
+        gallery4_title: 'మెడికల్ రికార్డ్స్ మేనేజ్‌మెంట్',
+        gallery4_desc: 'ఆరోగ్య పత్రాల సురక్షిత సంస్థ',
+        trust_title: 'భద్రత & గోప్యత',
+        trust_subtitle: 'మీ ఆరోగ్య డేటా మీ ఆస్తి. మేము దానిని పరిశ్రమ-అగ్రణి భద్రతతో రక్షిస్తాము.',
+        trust_iso: 'ISO ధృవీకరించబడింది',
+        trust_hipaa: 'HIPAA అనుగుణంగా',
+        trust_encrypted: 'ఎండ్-టు-ఎండ్ ఎన్క్రిప్టెడ్',
+        cta_title: 'మీ ఆరోగ్యాన్ని నియంత్రించడానికి సిద్ధంగా ఉన్నారా?',
+        cta_signup: 'ఇప్పుడే సైన్ అప్ చేయండి',
+        cta_demo: 'డెమో షెడ్యూల్ చేయండి',
+        footer_company: 'కంపెనీ',
+        footer_product: 'ఉత్పత్తి',
+        footer_legal: 'చట్టపరమైన',
+        footer_features: 'ఫీచర్లు',
+        footer_blog: 'బ్లాగ్',
+        footer_contact: 'సంప్రదించండి',
+        footer_careers: 'కెరీర్లు',
+        footer_privacy: 'గోప్యతా విధానం',
+        footer_terms: 'సేవా నిబంధనలు',
+        footer_hipaa: 'HIPAA నోటీసు',
+        footer_copyright: '© 2025 ఆరోగ్యసాథి. అన్ని హక్కులూ రిజర్వ్ చేయబడ్డాయి.'
+      },
+      mr: {
+        nav_home: 'होम',
+        nav_features: 'वैशिष्ट्ये',
+        nav_about: 'आमच्याबद्दल',
+        nav_contact: 'संपर्क',
+        hero_title: 'तुमचे आरोग्य, तुमची गोपनीयता, तुमचे नियंत्रण',
+        hero_subtitle: 'भारतासाठी AI-संचालित डिजिटल हेल्थ लॉकर',
+        cta_get_started: 'सुरू करा',
+        cta_learn_more: 'अधिक जाणून घ्या',
+        features_title: 'मुख्य वैशिष्ट्ये',
+        features_subtitle: 'तुमचे आरोग्य रेकॉर्ड सुरक्षितपणे व्यवस्थापित करण्यासाठी आवश्यक असलेले सर्वकाही',
+        feature_secure: 'सुरक्षित स्टोरेज',
+        feature_secure_desc: 'एंड-टू-एंड एन्क्रिप्टेड आरोग्य रेकॉर्ड',
+        feature_sharing: 'सोपे शेअरिंग',
+        feature_sharing_desc: 'संमतीसह डॉक्टर आणि प्रदात्यांसह रेकॉर्ड शेअर करा',
+        feature_multilang: 'बहुभाषिक',
+        feature_multilang_desc: '6 भारतीय भाषांमध्ये उपलब्ध',
+        feature_access: 'त्वरित प्रवेश',
+        feature_access_desc: 'कधीही, कुठेही तुमचे रेकॉर्ड प्रवेश करा',
+        feature_insurance: 'विमा तयार',
+        feature_insurance_desc: 'अखंड विमा दावा प्रक्रिया',
+        feature_privacy: 'गोपनीयता प्रथम',
+        feature_privacy_desc: 'तुमचा डेटा, तुमचे नियंत्रण',
+        how_title: 'हे कसे काम करते',
+        how_subtitle: '4 सोप्या चरणांमध्ये सुरू करा',
+        step1_title: 'साइन अप करा',
+        step1_desc: 'मिनिटांमध्ये तुमचे खाते तयार करा',
+        step2_title: 'रेकॉर्ड अपलोड करा',
+        step2_desc: 'तुमचे आरोग्य दस्तऐवज अपलोड करा',
+        step3_title: 'शेअर आणि संमती',
+        step3_desc: 'तुमच्या परवानगीसह प्रवेश द्या',
+        step4_title: 'कधीही प्रवेश',
+        step4_desc: 'तुमचे रेकॉर्ड, नेहमी तुमच्यासोबत',
+        testimonials_title: 'आरोग्य व्यावसायिकांद्वारे विश्वसनीय',
+        testimonials_subtitle: 'आमचे वापरकर्ते काय म्हणतात ते पहा',
+        testimonial_patient_quote: 'मी आता माझे सर्व आरोग्य रेकॉर्ड एका ठिकाणी व्यवस्थापित करू शकतो',
+        testimonial_patient_author: 'राज कुमार',
+        testimonial_patient_role: 'रुग्ण',
+        testimonial_doctor_quote: 'योग्य संमतीसह रुग्ण रेकॉर्डसाठी सोपा प्रवेश',
+        testimonial_doctor_author: 'डॉ. प्रिया सिंह',
+        testimonial_doctor_role: 'डॉक्टर',
+        testimonial_insurance_quote: 'डिजिटल दस्तऐवजांसह जलद दावा प्रक्रिया',
+        testimonial_insurance_author: 'एबीसी विमा',
+        testimonial_insurance_role: 'विमा प्रदाता',
+        gallery_title: 'आमचे नेटवर्क',
+        gallery_subtitle: 'आरोग्यसेवा प्रदाते, रुग्ण आणि विमा कंपन्या आरोग्यसाथीवर विश्वास ठेवतात',
+        gallery1_title: 'डॉक्टर सल्ला',
+        gallery1_desc: 'व्यावसायिक आरोग्यसेवा प्रदाते रुग्ण डेटा प्रवेश करत आहेत',
+        gallery2_title: 'डिजिटल हेल्थ तंत्रज्ञान',
+        gallery2_desc: 'AI-संचालित आरोग्य व्यवस्थापन इंटरफेस',
+        gallery3_title: 'आरोग्यसेवा टीम सहकार्य',
+        gallery3_desc: 'प्रदात्यांमधील अखंड समन्वय',
+        gallery4_title: 'वैद्यकीय रेकॉर्ड व्यवस्थापन',
+        gallery4_desc: 'आरोग्य दस्तऐवजांचे सुरक्षित संघटन',
+        trust_title: 'सुरक्षा आणि गोपनीयता',
+        trust_subtitle: 'तुमचा आरोग्य डेटा तुमची मालमत्ता आहे. आम्ही ते उद्योग-अग्रगण्य सुरक्षेसह संरक्षित करतो.',
+        trust_iso: 'ISO प्रमाणित',
+        trust_hipaa: 'HIPAA अनुरूप',
+        trust_encrypted: 'एंड-टू-एंड एन्क्रिप्टेड',
+        cta_title: 'तुमच्या आरोग्याचे नियंत्रण घेण्यासाठी तयार आहात?',
+        cta_signup: 'आता साइन अप करा',
+        cta_demo: 'डेमो शेड्यूल करा',
+        footer_company: 'कंपनी',
+        footer_product: 'उत्पादन',
+        footer_legal: 'कायदेशीर',
+        footer_features: 'वैशिष्ट्ये',
+        footer_blog: 'ब्लॉग',
+        footer_contact: 'संपर्क',
+        footer_careers: 'करिअर',
+        footer_privacy: 'गोपनीयता धोरण',
+        footer_terms: 'सेवा अटी',
+        footer_hipaa: 'HIPAA सूचना',
+        footer_copyright: '© 2025 आरोग्यसाथी. सर्व हक्क राखीव.'
+      },
+      bn: {
+        nav_home: 'হোম',
+        nav_features: 'বৈশিষ্ট্য',
+        nav_about: 'আমাদের সম্পর্কে',
+        nav_contact: 'যোগাযোগ',
+        hero_title: 'আপনার স্বাস্থ্য, আপনার গোপনীয়তা, আপনার নিয়ন্ত্রণ',
+        hero_subtitle: 'ভারতের জন্য AI-চালিত ডিজিটাল হেলথ লকার',
+        cta_get_started: 'শুরু করুন',
+        cta_learn_more: 'আরো জানুন',
+        features_title: 'মূল বৈশিষ্ট্য',
+        features_subtitle: 'আপনার স্বাস্থ্য রেকর্ড নিরাপদে পরিচালনা করার জন্য প্রয়োজনীয় সবকিছু',
+        feature_secure: 'নিরাপদ স্টোরেজ',
+        feature_secure_desc: 'এন্ড-টু-এন্ড এনক্রিপ্টেড স্বাস্থ্য রেকর্ড',
+        feature_sharing: 'সহজ শেয়ারিং',
+        feature_sharing_desc: 'সম্মতিসহ ডাক্তার এবং প্রদানকারীদের সাথে রেকর্ড শেয়ার করুন',
+        feature_multilang: 'বহুভাষিক',
+        feature_multilang_desc: '৬টি ভারতীয় ভাষায় উপলব্ধ',
+        feature_access: 'তাৎক্ষণিক অ্যাক্সেস',
+        feature_access_desc: 'যেকোনো সময়, যেকোনো জায়গা থেকে আপনার রেকর্ড অ্যাক্সেস করুন',
+        feature_insurance: 'বীমা প্রস্তুত',
+        feature_insurance_desc: 'নির্বিঘ্ন বীমা দাবি প্রক্রিয়াকরণ',
+        feature_privacy: 'গোপনীয়তা প্রথম',
+        feature_privacy_desc: 'আপনার ডেটা, আপনার নিয়ন্ত্রণ',
+        how_title: 'এটি কিভাবে কাজ করে',
+        how_subtitle: '৪টি সহজ ধাপে শুরু করুন',
+        step1_title: 'সাইন আপ করুন',
+        step1_desc: 'মিনিটের মধ্যে আপনার অ্যাকাউন্ট তৈরি করুন',
+        step2_title: 'রেকর্ড আপলোড করুন',
+        step2_desc: 'আপনার স্বাস্থ্য নথি আপলোড করুন',
+        step3_title: 'শেয়ার এবং সম্মতি',
+        step3_desc: 'আপনার অনুমতিসহ অ্যাক্সেস প্রদান করুন',
+        step4_title: 'যেকোনো সময় অ্যাক্সেস',
+        step4_desc: 'আপনার রেকর্ড, সবসময় আপনার সাথে',
+        testimonials_title: 'স্বাস্থ্য পেশাদারদের দ্বারা বিশ্বস্ত',
+        testimonials_subtitle: 'আমাদের ব্যবহারকারীরা কী বলছেন তা দেখুন',
+        testimonial_patient_quote: 'আমি এখন আমার সব স্বাস্থ্য রেকর্ড এক জায়গায় পরিচালনা করতে পারি',
+        testimonial_patient_author: 'রাজ কুমার',
+        testimonial_patient_role: 'রোগী',
+        testimonial_doctor_quote: 'সঠিক সম্মতিসহ রোগীর রেকর্ডে সহজ অ্যাক্সেস',
+        testimonial_doctor_author: 'ডাঃ প্রিয়া সিং',
+        testimonial_doctor_role: 'ডাক্তার',
+        testimonial_insurance_quote: 'ডিজিটাল নথিসহ দ্রুততর দাবি প্রক্রিয়াকরণ',
+        testimonial_insurance_author: 'এবিসি বীমা',
+        testimonial_insurance_role: 'বীমা প্রদানকারী',
+        gallery_title: 'আমাদের নেটওয়ার্ক',
+        gallery_subtitle: 'স্বাস্থ্যসেবা প্রদানকারী, রোগী এবং বীমা কোম্পানি আরোগ্যসাথীকে বিশ্বাস করে',
+        gallery1_title: 'ডাক্তার পরামর্শ',
+        gallery1_desc: 'পেশাদার স্বাস্থ্যসেবা প্রদানকারীরা রোগীর ডেটা অ্যাক্সেস করছেন',
+        gallery2_title: 'ডিজিটাল হেলথ প্রযুক্তি',
+        gallery2_desc: 'AI-চালিত স্বাস্থ্য ব্যবস্থাপনা ইন্টারফেস',
+        gallery3_title: 'স্বাস্থ্যসেবা টিম সহযোগিতা',
+        gallery3_desc: 'প্রদানকারীদের মধ্যে নির্বিঘ্ন সমন্বয়',
+        gallery4_title: 'মেডিকেল রেকর্ড ব্যবস্থাপনা',
+        gallery4_desc: 'স্বাস্থ্য নথির সুরক্ষিত সংস্থা',
+        trust_title: 'নিরাপত্তা এবং গোপনীয়তা',
+        trust_subtitle: 'আপনার স্বাস্থ্য ডেটা আপনার সম্পত্তি। আমরা এটি শিল্প-শীর্ষস্থানীয় নিরাপত্তা দিয়ে রক্ষা করি।',
+        trust_iso: 'ISO প্রত্যয়িত',
+        trust_hipaa: 'HIPAA সঙ্গতিপূর্ণ',
+        trust_encrypted: 'এন্ড-টু-এন্ড এনক্রিপ্টেড',
+        cta_title: 'আপনার স্বাস্থ্যের নিয়ন্ত্রণ নিতে প্রস্তুত?',
+        cta_signup: 'এখনই সাইন আপ করুন',
+        cta_demo: 'ডেমো সময়সূচী করুন',
+        footer_company: 'কোম্পানি',
+        footer_product: 'পণ্য',
+        footer_legal: 'আইনি',
+        footer_features: 'বৈশিষ্ট্য',
+        footer_blog: 'ব্লগ',
+        footer_contact: 'যোগাযোগ',
+        footer_careers: 'ক্যারিয়ার',
+        footer_privacy: 'গোপনীয়তা নীতি',
+        footer_terms: 'সেবা শর্তাবলী',
+        footer_hipaa: 'HIPAA বিজ্ঞপ্তি',
+        footer_copyright: '© 2025 আরোগ্যসাথী। সর্বস্বত্ব সংরক্ষিত।'
+      }
+    };
+
     // Multi-language dictionary - only for demo (real app: extend/centralize)
     const LANGDICT = {
       // en
@@ -444,24 +1218,266 @@
     // User session (in-memory storage)
     let _user = null, _lang = 'en', _role = null;
 
-    // Splash → App Loader
-    function hideSplashShowApp() {
-      const splash = document.getElementById('splash');
-      splash.classList.add('hide');
-      setTimeout(()=>{
-        splash.style.display='none';
-        document.getElementById('app-root').style.display = '';
-        loadLoginOrRedirect();
-      }, 900);
-    }
-    // Show App Main or login accordingly
-    function loadLoginOrRedirect() {
-      // If session user found, redirect to dashboard, else show login
+    // Initialize app - show homepage or dashboard
+    function initApp() {
       if(!_user) {
-        showAuthScreen('login');
+        showHomepage();
       } else {
         showDashboard(_user.role);
       }
+    }
+
+    // --------- HOMEPAGE ---------
+    function showHomepage() {
+      const content = HOMEPAGE_CONTENT[_lang] || HOMEPAGE_CONTENT.en;
+      const root = document.getElementById('app-root');
+      root.innerHTML = `
+        <div class="homepage">
+          <!-- Header -->
+          <header class="header">
+            <div class="header-content">
+              <div class="logo">🩺 ${APP_COMPANY.name}</div>
+              <nav class="nav-menu">
+                <a href="#home">${content.nav_home}</a>
+                <a href="#features">${content.nav_features}</a>
+                <a href="#gallery">${content.nav_about}</a>
+                <a href="#footer">${content.nav_contact}</a>
+              </nav>
+              <div class="header-actions">
+                ${renderLangSelector()}
+                <button class="btn btn--outline btn--sm" onclick="showAuthScreen('login')">${LANGDICT[_lang].login}</button>
+                <button class="btn btn--primary btn--sm" onclick="showAuthScreen('signup')">${LANGDICT[_lang].signup}</button>
+              </div>
+            </div>
+          </header>
+
+          <!-- Hero Section -->
+          <section class="hero" id="home">
+            <div class="hero-content">
+              <h1>${content.hero_title}</h1>
+              <p>${content.hero_subtitle}</p>
+              <div class="hero-buttons">
+                <button class="btn btn-hero btn-white" onclick="showAuthScreen('signup')">${content.cta_get_started}</button>
+                <button class="btn btn-hero btn-outline-white" onclick="scrollToFeatures()">${content.cta_learn_more}</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Features Section -->
+          <section class="section" id="features" style="background:var(--color-background);">
+            <div class="section-content">
+              <h2 class="section-title">${content.features_title}</h2>
+              <p class="section-subtitle">${content.features_subtitle}</p>
+              <div class="features-grid">
+                <div class="feature-card">
+                  <div class="feature-icon">🔐</div>
+                  <h3 class="feature-title">${content.feature_secure}</h3>
+                  <p class="feature-desc">${content.feature_secure_desc}</p>
+                </div>
+                <div class="feature-card">
+                  <div class="feature-icon">🤝</div>
+                  <h3 class="feature-title">${content.feature_sharing}</h3>
+                  <p class="feature-desc">${content.feature_sharing_desc}</p>
+                </div>
+                <div class="feature-card">
+                  <div class="feature-icon">🌍</div>
+                  <h3 class="feature-title">${content.feature_multilang}</h3>
+                  <p class="feature-desc">${content.feature_multilang_desc}</p>
+                </div>
+                <div class="feature-card">
+                  <div class="feature-icon">📱</div>
+                  <h3 class="feature-title">${content.feature_access}</h3>
+                  <p class="feature-desc">${content.feature_access_desc}</p>
+                </div>
+                <div class="feature-card">
+                  <div class="feature-icon">📋</div>
+                  <h3 class="feature-title">${content.feature_insurance}</h3>
+                  <p class="feature-desc">${content.feature_insurance_desc}</p>
+                </div>
+                <div class="feature-card">
+                  <div class="feature-icon">🛡️</div>
+                  <h3 class="feature-title">${content.feature_privacy}</h3>
+                  <p class="feature-desc">${content.feature_privacy_desc}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- How It Works Section -->
+          <section class="section" style="background:var(--color-bg-1);">
+            <div class="section-content">
+              <h2 class="section-title">${content.how_title}</h2>
+              <p class="section-subtitle">${content.how_subtitle}</p>
+              <div class="steps-container">
+                <div class="step-card">
+                  <div class="step-number">1</div>
+                  <div class="step-icon">👤</div>
+                  <h3 class="step-title">${content.step1_title}</h3>
+                  <p>${content.step1_desc}</p>
+                </div>
+                <div class="step-card">
+                  <div class="step-number">2</div>
+                  <div class="step-icon">📄</div>
+                  <h3 class="step-title">${content.step2_title}</h3>
+                  <p>${content.step2_desc}</p>
+                </div>
+                <div class="step-card">
+                  <div class="step-number">3</div>
+                  <div class="step-icon">✓</div>
+                  <h3 class="step-title">${content.step3_title}</h3>
+                  <p>${content.step3_desc}</p>
+                </div>
+                <div class="step-card">
+                  <div class="step-number">4</div>
+                  <div class="step-icon">📱</div>
+                  <h3 class="step-title">${content.step4_title}</h3>
+                  <p>${content.step4_desc}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Testimonials Section -->
+          <section class="section" style="background:var(--color-background);">
+            <div class="section-content">
+              <h2 class="section-title">${content.testimonials_title}</h2>
+              <p class="section-subtitle">${content.testimonials_subtitle}</p>
+              <div class="testimonials-grid">
+                <div class="testimonial-card">
+                  <div class="testimonial-icon">👨‍🦱</div>
+                  <p class="testimonial-quote">&quot;${content.testimonial_patient_quote}&quot;</p>
+                  <p class="testimonial-author">${content.testimonial_patient_author}</p>
+                  <p class="testimonial-role">${content.testimonial_patient_role}</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-icon">👩‍⚕️</div>
+                  <p class="testimonial-quote">&quot;${content.testimonial_doctor_quote}&quot;</p>
+                  <p class="testimonial-author">${content.testimonial_doctor_author}</p>
+                  <p class="testimonial-role">${content.testimonial_doctor_role}</p>
+                </div>
+                <div class="testimonial-card">
+                  <div class="testimonial-icon">🏢</div>
+                  <p class="testimonial-quote">&quot;${content.testimonial_insurance_quote}&quot;</p>
+                  <p class="testimonial-author">${content.testimonial_insurance_author}</p>
+                  <p class="testimonial-role">${content.testimonial_insurance_role}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Gallery Section -->
+          <section class="section" id="gallery" style="background:var(--color-bg-2);">
+            <div class="section-content">
+              <h2 class="section-title">${content.gallery_title}</h2>
+              <p class="section-subtitle">${content.gallery_subtitle}</p>
+              <div class="gallery-grid">
+                <div class="gallery-item">
+                  <img src="https://pplx-res.cloudinary.com/image/upload/v1763180354/search_images/2c83a3aedcd70bd1ab7b593dde2471e732e15f61.jpg" alt="Doctor consultation" class="gallery-img" />
+                  <div class="gallery-caption">
+                    <div class="gallery-title">${content.gallery1_title}</div>
+                    <div class="gallery-desc">${content.gallery1_desc}</div>
+                  </div>
+                </div>
+                <div class="gallery-item">
+                  <img src="https://pplx-res.cloudinary.com/image/upload/v1763324374/search_images/0ec2b4cd7d9cbe3b32c94ca5c42ae783e30d9f32.jpg" alt="Digital health technology" class="gallery-img" />
+                  <div class="gallery-caption">
+                    <div class="gallery-title">${content.gallery2_title}</div>
+                    <div class="gallery-desc">${content.gallery2_desc}</div>
+                  </div>
+                </div>
+                <div class="gallery-item">
+                  <img src="https://pplx-res.cloudinary.com/image/upload/v1763119891/search_images/f66979133dcaae16ba4e6824dbd1171ef7e0e24e.jpg" alt="Healthcare team" class="gallery-img" />
+                  <div class="gallery-caption">
+                    <div class="gallery-title">${content.gallery3_title}</div>
+                    <div class="gallery-desc">${content.gallery3_desc}</div>
+                  </div>
+                </div>
+                <div class="gallery-item">
+                  <img src="https://pplx-res.cloudinary.com/image/upload/v1763471075/search_images/f9cf0b84c7e76ba36a232e6556f7dfc700a06c7b.jpg" alt="Medical records" class="gallery-img" />
+                  <div class="gallery-caption">
+                    <div class="gallery-title">${content.gallery4_title}</div>
+                    <div class="gallery-desc">${content.gallery4_desc}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Trust & Security Section -->
+          <section class="section trust-section">
+            <div class="section-content">
+              <h2 class="section-title">${content.trust_title}</h2>
+              <p class="section-subtitle">${content.trust_subtitle}</p>
+              <div class="trust-badges">
+                <div class="badge">
+                  <span class="badge-icon">✓</span>
+                  <span>${content.trust_iso}</span>
+                </div>
+                <div class="badge">
+                  <span class="badge-icon">🔒</span>
+                  <span>${content.trust_hipaa}</span>
+                </div>
+                <div class="badge">
+                  <span class="badge-icon">🔐</span>
+                  <span>${content.trust_encrypted}</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CTA Section -->
+          <section class="cta-section">
+            <div class="section-content">
+              <h2>${content.cta_title}</h2>
+              <div class="cta-buttons">
+                <button class="btn btn-hero btn-white" onclick="showAuthScreen('signup')">${content.cta_signup}</button>
+                <button class="btn btn-hero btn-outline-white" onclick="alert('Demo scheduling - coming soon!')">${content.cta_demo}</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Footer -->
+          <footer class="footer" id="footer">
+            <div class="footer-content">
+              <div class="footer-section">
+                <h4>${APP_COMPANY.name}</h4>
+                <p style="color:var(--color-text-secondary);">${APP_COMPANY.tagline}</p>
+                <p style="color:var(--color-text-secondary);margin-top:8px;">${APP_COMPANY.domain}</p>
+              </div>
+              <div class="footer-section">
+                <h4>${content.footer_product}</h4>
+                <ul class="footer-links">
+                  <li><a href="#features">${content.footer_features}</a></li>
+                  <li><a href="#">${content.footer_blog}</a></li>
+                  <li><a href="#">${content.footer_careers}</a></li>
+                </ul>
+              </div>
+              <div class="footer-section">
+                <h4>${content.footer_company}</h4>
+                <ul class="footer-links">
+                  <li><a href="#gallery">${content.nav_about}</a></li>
+                  <li><a href="#footer">${content.footer_contact}</a></li>
+                </ul>
+              </div>
+              <div class="footer-section">
+                <h4>${content.footer_legal}</h4>
+                <ul class="footer-links">
+                  <li><a href="#">${content.footer_privacy}</a></li>
+                  <li><a href="#">${content.footer_terms}</a></li>
+                  <li><a href="#">${content.footer_hipaa}</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="footer-bottom">
+              <p>${content.footer_copyright}</p>
+            </div>
+          </footer>
+        </div>
+      `;
+    }
+
+    function scrollToFeatures() {
+      document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
     }
     // --------- AUTH SCREENS ----------
     function showAuthScreen(type) {
@@ -579,7 +1595,7 @@
     function selectLang(lcode) {
       _lang = lcode;
       // Reload view (depends on state)
-      if(_user) showDashboard(_user.role); else showAuthScreen('login');
+      if(_user) showDashboard(_user.role); else showHomepage();
     }
 
     // --------- DASHBOARD ROUTER ---------
@@ -871,8 +1887,8 @@
         showAuthScreen('login');
       }
     }
-    // ------------- INIT: Run splash, then load next screen ------------
-    setTimeout(hideSplashShowApp, 2300 + Math.random()*1200);
+    // ------------- INIT: Load app immediately ------------
+    initApp();
   </script>
 </body>
 </html>
