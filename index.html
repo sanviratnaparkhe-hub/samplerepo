@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AarogyaSathi Digital Health Locker</title>
+  <meta name="description" content="AI-powered Digital Health Locker - AarogyaSathi.in" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><text y='40' font-size='40'>🩺</text></svg>" />
+  <style>
+    :root {
+      --primary: #0066cc;
+      --secondary: #20b2aa;
+      --danger: #e74c3c;
+      --success: #27ae60;
+      --warning: #f39c12;
+      --neutral-light: #f5f5f5;
+      --neutral-dark: #333333;
+    }
+    /* Perplexity Design System */
+    :root {
+      --color-white: rgba(255, 255, 255, 1);
+      --color-black: rgba(0, 0, 0, 1);
+      --color-cream-50: rgba(252, 252, 249, 1);
+      --color-cream-100: rgba(255, 255, 253, 1);
+      --color-gray-200: rgba(245, 245, 245, 1);
+      --color-gray-300: rgba(167, 169, 169, 1);
+      --color-gray-400: rgba(119, 124, 124, 1);
+      --color-slate-500: rgba(98, 108, 113, 1);
+      --color-brown-600: rgba(94, 82, 64, 1);
+      --color-charcoal-700: rgba(31, 33, 33, 1);
+      --color-charcoal-800: rgba(38, 40, 40, 1);
+      --color-slate-900: rgba(19, 52, 59, 1);
+      --color-teal-300: rgba(50, 184, 198, 1);
+      --color-teal-400: rgba(45, 166, 178, 1);
+      --color-teal-500: rgba(33, 128, 141, 1);
+      --color-teal-600: rgba(29, 116, 128, 1);
+      --color-brown-600-rgb: 94, 82, 64;
+      --color-teal-500-rgb: 33, 128, 141;
+      --color-slate-900-rgb: 19, 52, 59;
+      --color-slate-500-rgb: 98, 108, 113;
+      --color-bg-1: rgba(59, 130, 246, 0.08);
+      --color-bg-2: rgba(245, 158, 11, 0.08);
+      --color-bg-3: rgba(34, 197, 94, 0.08);
+      --color-background: var(--color-cream-50);
+      --color-surface: var(--color-cream-100);
+      --color-text: var(--color-slate-900);
+      --color-text-secondary: var(--color-slate-500);
+      --color-primary: var(--color-teal-500);
+      --color-primary-hover: var(--color-teal-600);
+      --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+      --color-btn-primary-text: var(--color-cream-50);
+      --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+      --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+      --font-family-base: 'FKGroteskNeue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-size-xs: 11px;
+      --font-size-sm: 12px;
+      --font-size-base: 14px;
+      --font-size-md: 14px;
+      --font-size-lg: 16px;
+      --font-size-xl: 18px;
+      --font-size-2xl: 20px;
+      --font-size-3xl: 24px;
+      --font-size-4xl: 30px;
+      --font-weight-normal: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 550;
+      --font-weight-bold: 600;
+      --line-height-tight: 1.2;
+      --line-height-normal: 1.5;
+      --space-0: 0;
+      --space-4: 4px;
+      --space-6: 6px;
+      --space-8: 8px;
+      --space-10: 10px;
+      --space-12: 12px;
+      --space-16: 16px;
+      --space-20: 20px;
+      --space-24: 24px;
+      --space-32: 32px;
+      --radius-sm: 6px;
+      --radius-base: 8px;
+      --radius-md: 10px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      --duration-fast: 150ms;
+      --duration-normal: 250ms;
+      --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+      --focus-ring: 0 0 0 3px var(--color-focus-ring);
+      --focus-outline: 2px solid var(--color-primary);
+      --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-background: var(--color-charcoal-700);
+        --color-surface: var(--color-charcoal-800);
+        --color-text: var(--color-gray-200);
+        --color-text-secondary: rgba(167, 169, 169, 0.7);
+        --color-primary: var(--color-teal-300);
+        --color-primary-hover: var(--color-teal-400);
+        --color-btn-primary-text: var(--color-slate-900);
+      }
+    }
+    @font-face {
+      font-family: 'FKGroteskNeue';
+      src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+    }
+    html {
+      font-size: var(--font-size-base);
+      font-family: var(--font-family-base);
+      line-height: var(--line-height-normal);
+      color: var(--color-text);
+      background-color: var(--color-background);
+      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
+    }
+    body { margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: inherit; }
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-tight);
+      color: var(--color-text);
+    }
+    h1 { font-size: var(--font-size-4xl); }
+    h2 { font-size: var(--font-size-3xl); }
+    h3 { font-size: var(--font-size-2xl); }
+    h4 { font-size: var(--font-size-xl); }
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color var(--duration-fast) var(--ease-standard);
+    }
+    a:hover { color: var(--color-primary-hover); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-8) var(--space-16);
+      border-radius: var(--radius-base);
+      font-size: var(--font-size-base);
+      font-weight: 500;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: all var(--duration-normal) var(--ease-standard);
+      border: none;
+      text-decoration: none;
+    }
+    .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    .btn--primary {
+      background: var(--color-primary);
+      color: var(--color-btn-primary-text);
+    }
+    .btn--primary:hover { background: var(--color-primary-hover); }
+    .btn--outline {
+      background: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+    }
+    .btn--outline:hover { background: var(--color-secondary); }
+    .btn--sm {
+      padding: var(--space-4) var(--space-12);
+      font-size: var(--font-size-sm);
+      border-radius: var(--radius-sm);
+    }
+    .btn--full-width { width: 100%; }
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: var(--space-8) var(--space-12);
+      font-size: var(--font-size-md);
+      line-height: 1.5;
+      color: var(--color-text);
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-base);
+      transition: border-color var(--duration-fast) var(--ease-standard);
+    }
+    select.form-control {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: var(--select-caret-light);
+      background-repeat: no-repeat;
+      background-position: right var(--space-12) center;
+      background-size: 16px;
+      padding-right: var(--space-32);
+    }
+    .form-control:focus {
+      border-color: var(--color-primary);
+      outline: var(--focus-outline);
+    }
+    .form-label {
+      display: block;
+      margin-bottom: var(--space-8);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-size-sm);
+    }
+    .form-group { margin-bottom: var(--space-16); }
+    .card {
+      background-color: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-card-border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: box-shadow var(--duration-normal) var(--ease-standard);
+    }
+    .card:hover { box-shadow: var(--shadow-md); }
+    .card__body { padding: var(--space-16); }
+    .card__header {
+      padding: var(--space-16);
+      border-bottom: 1px solid var(--color-card-border);
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-6) var(--space-12);
+      border-radius: var(--radius-full);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-size-sm);
+    }
+    .status--success {
+      background-color: rgba(var(--color-teal-500-rgb), 0.15);
+      color: var(--color-primary);
+      border: 1px solid rgba(var(--color-teal-500-rgb), 0.25);
+    }
+    .container {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: var(--space-16);
+      padding-left: var(--space-16);
+      max-width: 1280px;
+    }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-4 { gap: var(--space-4); }
+    .gap-8 { gap: var(--space-8); }
+    .gap-16 { gap: var(--space-16); }
+    .mb-8 { margin-bottom: var(--space-8); }
+    .mt-8 { margin-top: var(--space-8); }
+    .ml-8 { margin-left: var(--space-8); }
+    .px-16 { padding-left: var(--space-16); padding-right: var(--space-16); }
+    .py-16 { padding-top: var(--space-16); padding-bottom: var(--space-16); }
+    .table { border-collapse: collapse; }
+    .table th, .table td { padding: var(--space-8); text-align: left; border-bottom: 1px solid var(--color-border); }
+
+    /* Splash Screen Styles */
+    .splash {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 10000;
+      background: linear-gradient(135deg, var(--primary), var(--secondary) 90%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s;
+      opacity: 1;
+      will-change: opacity;
+      color: #fff;
+      font-family: var(--font-family-base);
+    }
+    .splash.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .splash__logo {
+      width: 110px;
+      height: 110px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 24px 0 #0066cc33;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      animation: popInLogo 1.2s cubic-bezier(.61,.16,.19,1.09) 0.3s;
+      animation-fill-mode: backwards;
+    }
+    @keyframes popInLogo {
+      0% {transform: scale(0.2) rotate(-40deg); opacity:0.2;}
+      60% {transform: scale(1.15) rotate(8deg) ; opacity:1;}
+      100% {transform: scale(1) rotate(0deg);}
+    }
+    .splash__title {
+      font-size: 2.1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      letter-spacing: 1.2px;
+      text-shadow: 0 1px 8px #0066cc44;
+      animation: fadeUp 1s cubic-bezier(.61,.16,.19,1.09) 0.8s;
+      animation-fill-mode: backwards;
+    }
+    .splash__tagline {
+      font-size: 1.1rem;
+      font-weight: 500;
+      opacity: 0.95;
+      letter-spacing: 0.6px;
+      text-align: center;
+      animation: fadeUp 1.1s cubic-bezier(.61,.16,.19,1.09) 1.1s;
+      animation-fill-mode: backwards;
+    }
+    @keyframes fadeUp {
+      0% {opacity: 0; transform: translateY(18px);}
+      100% {opacity: 1; transform: none;}
+    }
+    .splash__loader {
+      margin-top:32px;
+      width:46px; height:6px;
+      border-radius:3px;
+      background: linear-gradient(90deg, #fff2 0%, #fff9 40%, #fff2 100%);
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 1s 1.8s;
+      animation-fill-mode: backwards;
+      opacity:0.86;
+      box-shadow: 0 0 8px #fff5;
+    }
+    .splash__loader::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: -38px; top: 0;
+      height: 6px; width: 42px;
+      background: linear-gradient(90deg, #fff8 0%, #fff 45%, #fff8 100%);
+      animation: loaderGlide 2.1s infinite cubic-bezier(.61,.16,.19,1.09);
+    }
+    @keyframes loaderGlide {
+      0% {left: -40px;}
+      88% {left: 42px;}
+      100% {left: 42px;}
+    }
+    /* Responsive */
+    @media (max-width: 480px) {
+      .splash__logo { width: 82px; height: 82px; font-size:40px; }
+      .splash__title { font-size: 1.5rem; }
+    }
+    /* App Main general override for dark bg */
+    body {
+      background: var(--color-background);
+    }
+  </style>
+</head>
+<body>
+  <!-- Splash screen -->
+  <div class="splash" id="splash">
+    <div class="splash__logo" aria-label="AarogyaSathi Health Locker">🩺</div>
+    <div class="splash__title">AarogyaSathi</div>
+    <div class="splash__tagline">Your Health, Your Privacy, Your Control</div>
+    <div class="splash__loader" role="status" aria-label="Loading"></div>
+  </div>
+
+  <!-- Main App root -->
+  <div id="app-root" style="display:none;"></div>
+
+  <script>
+    // Global App Data
+    const APP_LANGS = [
+      {code:'en', name:'English'},
+      {code:'hi', name:'हिंदी'},
+      {code:'ta', name:'தமிழ்'},
+      {code:'te', name:'తెలుగు'},
+      {code:'mr', name:'मराठी'},
+      {code:'bn', name:'বাংলা'}
+    ];
+    const APP_COMPANY = {
+      name: 'AarogyaSathi',
+      domain: 'aarogyasathi.in',
+      tagline: 'Your Health, Your Privacy, Your Control',
+      description: 'AI-powered Digital Health Locker'
+    };
+    const USER_ROLES = [
+      {key:'patient', label:'Patient'},
+      {key:'provider', label:'Provider'},
+      {key:'insurance', label:'Insurance'}
+    ];
+    // Demo data
+    const SAMPLE_PATIENTS = [
+      { id: "P001", name: "राज कुमार", email: "raj.kumar@email.com", phone: "+91-9876543210", role: "patient", avatar: "👨‍⚕️" }
+    ];
+    const SAMPLE_PROVIDERS = [
+      { id: "PR001", name: "Dr. Priya Singh", email: "priya.singh@hospital.com", specialization: "Cardiology", role: "provider", avatar: "👩‍⚕️" }
+    ];
+    const SAMPLE_RECORDS = [
+      { id: "R001", name: "Blood Test Report - Oct 2025", type: "Lab", date: "2025-10-15", folder: "Lab Tests", shared: false },
+      { id: "R002", name: "Prescription - Diabetes", type: "Prescription", date: "2025-10-20", folder: "Prescriptions", shared: true },
+    ];
+    // Multi-language dictionary - only for demo (real app: extend/centralize)
+    const LANGDICT = {
+      // en
+      en:{
+        login:'Login',signup:'Sign Up',email:'Email',phone:'Phone',password:'Password',name:'Full Name',
+        forgot:'Forgot Password?',
+        google:'Continue with Google',otp:'OTP via Phone',remember:'Remember me',
+        role:'Role',patient:'Patient',provider:'Provider',insurance:'Insurance',
+        welcome:'Welcome',logout:'Logout',language:'Language',dashboard:'Dashboard',
+        upload:'Upload Records',share:'Share Records',viewshared:'View Shared',consent:'Manage Consent',activity:'Recent Activity',folders:'Folders',addfolder:'Add Folder',profile:'Profile',settings:'Settings',records:'Records',type:'Type',date:'Date',shared:'Shared?',action:'Action',privacy:'Your data is encrypted',ssl:'SSL Secured',terms:'Terms &amp; Conditions',privacy_policy:'Privacy Policy',data_protect:'Data Protection',delete:'Delete Account',twofa:'2FA',notifications:'Notifications',changepw:'Change Password',save:'Save',edit:'Edit',back:'Back',request:'Request',status:'Status',approved:'Approved',pending:'Pending',rejected:'Rejected',requestrecord:'Request Records',consent_active:'Active',consent_pending:'Pending',consent_expired:'Expired',grantconsent:'Grant Consent',scope:'Scope',duration:'Duration',revoke:'Revoke',history:'Consent History',audit:'Audit Log',success_upload:'Upload Successful',error_upload:'Upload Failed',confirm_delete:'Confirm Delete?',yes:'Yes',no:'No',file_preview:'Preview',logout_confirm:'Logout?',delete_confirm:'Delete account? This can\'t be undone.',otp_sent:'OTP sent to phone',notifications_enable:'Enable Notifications',notifications_disable:'Disable Notifications',invalid:'Invalid input',welcome_dash:'Welcome to your Digital Health Locker!',storage:'Storage Used'
+      },
+      hi:{
+        login:'लॉगिन',signup:'रजिस्ट्रेशन',email:'ईमेल',phone:'फोन',password:'पासवर्ड',
+        forgot:'पासवर्ड भूल गए?',
+        google:'गूगल से लॉगिन',otp:'फोन ओटीपी',remember:'मुझे याद रखें',
+        role:'भूमिका',patient:'रोगी',provider:'प्रदाता',insurance:'बीमा',
+        welcome:'स्वागत है',logout:'लॉगआउट',language:'भाषा',dashboard:'डैशबोर्ड',
+        upload:'रिपोर्ट अपलोड',share:'रिपोर्ट साझा करें',viewshared:'साझा देखें',consent:'सहमति प्रबंधन',activity:'हालिया गतिविधि',folders:'फोल्डर',addfolder:'फोल्डर जोड़ें',profile:'प्रोफ़ाइल',settings:'सेटिंग्स',records:'रिकॉर्ड्स',type:'प्रकार',date:'तारीख',shared:'साझा?',action:'क्रिया',privacy:'आपका डेटा एन्क्रिप्टेड है',ssl:'SSL सुरक्षित',terms:'नियम एवं शर्तें',privacy_policy:'गोपनीयता नीति',data_protect:'डेटा सुरक्षा',delete:'खाता हटाएँ',twofa:'दो-चरणीय प्रमाणीकरण',notifications:'सूचनाएं',changepw:'पासवर्ड बदलें',save:'सहेजें',edit:'संपादित करें',back:'वापस',request:'अनुरोध',status:'स्थिति',approved:'स्वीकृत',pending:'लंबित',rejected:'अस्वीकृत',requestrecord:'रिकॉर्ड अनुरोध',consent_active:'सक्रिय',consent_pending:'लंबित',consent_expired:'समाप्त',grantconsent:'अनुमति दें',scope:'सीमा',duration:'अवधि',revoke:'रद्द करें',history:'सहमति इतिहास',audit:'लॉग',success_upload:'अपलोड सफल',error_upload:'अपलोड विफल',confirm_delete:'हटाना सुनिश्चित करें?',yes:'हाँ',no:'नहीं',file_preview:'पूर्वावलोकन',logout_confirm:'लॉगआउट?',delete_confirm:'क्या आप वाकई खाता हटाना चाहते हैं?',otp_sent:'ओटीपी भेजा गया',notifications_enable:'सूचनाएँ सक्षम करें',notifications_disable:'सूचनाएँ अक्षम करें',invalid:'अमान्य इनपुट',welcome_dash:'आपका डिजिटल हेल्थ लॉकर!',storage:'स्टोरेज उपयोग'
+      },
+      ta:{
+        login:'உள்நுழைவு',signup:'பதிவு செய்யவும்',email:'மின்னஞ்சல்',phone:'தொலைபேசி',password:'கடவுச்சொல்',name:'முழு பெயர்',
+        forgot:'கடவுச்சொல் மறந்துவிட்டதா?',google:'Google மூலம்',otp:'OTP',remember:'என்னை நினைவில் கொள்',
+        role:'பங்கு',patient:'நோயாளி',provider:'மருத்துவர்',insurance:'காப்பீடு',
+        welcome:'வரவேற்பு',logout:'வெளியேறு',language:'மொழி',dashboard:'டாஷ்போர்டு',
+        upload:'பதிவேற்றம்',share:'பகிர்',viewshared:'பார்வை',consent:'ஒப்புதல்',activity:'செயல்பாடு',folders:'கோப்புறைகள்',addfolder:'கோப்புறை சேர்',profile:'சுயவிவரம்',settings:'அமைப்புகள்',records:'பதிவுகள்',type:'வகை',date:'தேதி',shared:'பகிர்ந்தது?',action:'செயல்',privacy:'உங்கள் தரவு குறியாக்கம் செய்யப்பட்டது',ssl:'SSL பாதுகாப்பு',terms:'விதிமுறைகள்',privacy_policy:'தனியுரிமை கொள்கை',data_protect:'தரவு பாதுகாப்பு',delete:'கணக்கை நீக்கு',twofa:'2FA',notifications:'அறிவிப்புகள்',changepw:'கடவுச்சொல் மாற்று',save:'சேமி',edit:'திருத்து',back:'பின்',request:'கோரிக்கை',status:'நிலை',approved:'அங்கீகரிக்கப்பட்டது',pending:'நிலுவையில்',rejected:'நிராகரிக்கப்பட்டது',requestrecord:'பதிவுகள் கோரிக்கை',consent_active:'செயலில்',consent_pending:'நிலுவை',consent_expired:'காலாவதி',grantconsent:'அனுமதி',scope:'நோக்கம்',duration:'கால',revoke:'திரும்பப் பெறு',history:'வரலாறு',audit:'தணிக்கை',success_upload:'பதிவேற்றம் வெற்றி',error_upload:'பதிவேற்றம் தோல்வி',confirm_delete:'நீக்க உறுதிப்படுத்தவா?',yes:'ஆம்',no:'இல்லை',file_preview:'முன்னோட்டம்',logout_confirm:'வெளியேறவா?',delete_confirm:'கணக்கை நீக்கவா?',otp_sent:'OTP அனுப்பப்பட்டது',notifications_enable:'அறிவிப்புகளை இயக்கு',notifications_disable:'அறிவிப்புகளை முடக்கு',invalid:'தவறான உள்ளீடு',welcome_dash:'உங்கள் டிஜிட்டல் சுகாதார பதிவகத்திற்கு வரவேற்கிறோம்!',storage:'சேமிப்பு'
+      },
+      te:{
+        login:'లాగిన్',signup:'నమోదు',email:'ఇమెయిల్',phone:'ఫోన్',password:'పాస్వర్డ్',name:'పూర్తి పేరు',
+        forgot:'పాస్వర్డ్ మర్చిపోయారా?',google:'Google తో',otp:'OTP',remember:'గుర్తుంచుకో',
+        role:'పాత్ర',patient:'రోగి',provider:'ప్రొవైడర్',insurance:'బీమా',
+        welcome:'స్వాగతం',logout:'లాగ్అవుట్',language:'భాష',dashboard:'డాష్బోర్డ్',
+        upload:'అప్లోడ్',share:'షేర్',viewshared:'షేర్డ్ వ్యూ',consent:'సమ్మతి',activity:'కార్యకలాపం',folders:'ఫోల్డర్లు',addfolder:'ఫోల్డర్ జోడించు',profile:'ప్రొఫైల్',settings:'సెట్టింగ్స్',records:'రికార్డులు',type:'రకం',date:'తేదీ',shared:'షేర్ అయింది?',action:'చర్య',privacy:'మీ డేటా ఎన్క్రిప్టెడ్',ssl:'SSL సురక్షితం',terms:'నిబంధనలు',privacy_policy:'గోప్యతా విధానం',data_protect:'డేటా రక్షణ',delete:'ఖాతా తొలగించు',twofa:'2FA',notifications:'నోటిఫికేషన్లు',changepw:'పాస్వర్డ్ మార్చు',save:'సేవ్',edit:'ఎడిట్',back:'వెనక్కి',request:'అభ్యర్థన',status:'స్థితి',approved:'ఆమోదించబడింది',pending:'పెండింగ్',rejected:'తిరస్కరించబడింది',requestrecord:'రికార్డుల అభ్యర్థన',consent_active:'యాక్టివ్',consent_pending:'పెండింగ్',consent_expired:'గడువు ముగిసింది',grantconsent:'అనుమతి',scope:'పరిధి',duration:'వ్యవధి',revoke:'ఉపసంహరించు',history:'చరిత్ర',audit:'ఆడిట్',success_upload:'అప్లోడ్ విజయవంతం',error_upload:'అప్లోడ్ విఫలం',confirm_delete:'తొలగించడాన్ని నిర్ధారించండి?',yes:'అవును',no:'కాదు',file_preview:'ప్రివ్యూ',logout_confirm:'లాగ్అవుట్?',delete_confirm:'ఖాతా తొలగించాలా?',otp_sent:'OTP పంపబడింది',notifications_enable:'నోటిఫికేషన్లు ప్రారంభించు',notifications_disable:'నోటిఫికేషన్లు నిలిపివేయి',invalid:'చెల్లని ఇన్పుట్',welcome_dash:'మీ డిజిటల్ హెల్త్ లాకర్కు స్వాగతం!',storage:'నిల్వ'
+      },
+      mr:{
+        login:'लॉगिन',signup:'नोंदणी',email:'ईमेल',phone:'फोन',password:'पासवर्ड',name:'पूर्ण नाव',
+        forgot:'पासवर्ड विसरलात?',google:'Google सह',otp:'OTP',remember:'लक्षात ठेवा',
+        role:'भूमिका',patient:'रुग्ण',provider:'प्रदाता',insurance:'विमा',
+        welcome:'स्वागत',logout:'लॉगआउट',language:'भाषा',dashboard:'डॅशबोर्ड',
+        upload:'अपलोड',share:'शेअर',viewshared:'शेअर केलेले',consent:'संमती',activity:'क्रियाकलाप',folders:'फोल्डर्स',addfolder:'फोल्डर जोडा',profile:'प्रोफाइल',settings:'सेटिंग्ज',records:'रेकॉर्ड',type:'प्रकार',date:'तारीख',shared:'शेअर केले?',action:'कृती',privacy:'तुमचा डेटा एन्क्रिप्टेड',ssl:'SSL सुरक्षित',terms:'अटी व शर्ती',privacy_policy:'गोपनीयता धोरण',data_protect:'डेटा संरक्षण',delete:'खाते हटवा',twofa:'2FA',notifications:'सूचना',changepw:'पासवर्ड बदला',save:'जतन करा',edit:'संपादित करा',back:'मागे',request:'विनंती',status:'स्थिती',approved:'मंजूर',pending:'प्रलंबित',rejected:'नाकारले',requestrecord:'रेकॉर्ड विनंती',consent_active:'सक्रिय',consent_pending:'प्रलंबित',consent_expired:'कालबाह्य',grantconsent:'संमती द्या',scope:'व्याप्ती',duration:'कालावधी',revoke:'रद्द करा',history:'इतिहास',audit:'ऑडिट',success_upload:'अपलोड यशस्वी',error_upload:'अपलोड अयशस्वी',confirm_delete:'हटवण्याची पुष्टी करा?',yes:'होय',no:'नाही',file_preview:'पूर्वावलोकन',logout_confirm:'लॉगआउट?',delete_confirm:'खाते हटवायचे?',otp_sent:'OTP पाठवले',notifications_enable:'सूचना सक्षम करा',notifications_disable:'सूचना अक्षम करा',invalid:'अवैध इनपुट',welcome_dash:'तुमच्या डिजिटल हेल्थ लॉकरमध्ये स्वागत!',storage:'स्टोरेज'
+      },
+      bn:{
+        login:'লগইন',signup:'নিবন্ধন',email:'ইমেইল',phone:'ফোন',password:'পাসওয়ার্ড',name:'পুরো নাম',
+        forgot:'পাসওয়ার্ড ভুলে গেছেন?',google:'Google দিয়ে',otp:'OTP',remember:'মনে রাখুন',
+        role:'ভূমিকা',patient:'রোগী',provider:'প্রদানকারী',insurance:'বীমা',
+        welcome:'স্বাগতম',logout:'লগআউট',language:'ভাষা',dashboard:'ড্যাশবোর্ড',
+        upload:'আপলোড',share:'শেয়ার',viewshared:'শেয়ার করা',consent:'সম্মতি',activity:'কার্যকলাপ',folders:'ফোল্ডার',addfolder:'ফোল্ডার যোগ করুন',profile:'প্রোফাইল',settings:'সেটিংস',records:'রেকর্ড',type:'প্রকার',date:'তারিখ',shared:'শেয়ার করা?',action:'কর্ম',privacy:'আপনার ডেটা এনক্রিপ্ট করা',ssl:'SSL সুরক্ষিত',terms:'শর্তাবলী',privacy_policy:'গোপনীয়তা নীতি',data_protect:'ডেটা সুরক্ষা',delete:'অ্যাকাউন্ট মুছুন',twofa:'2FA',notifications:'বিজ্ঞপ্তি',changepw:'পাসওয়ার্ড পরিবর্তন',save:'সংরক্ষণ',edit:'সম্পাদনা',back:'পেছনে',request:'অনুরোধ',status:'অবস্থা',approved:'অনুমোদিত',pending:'মুলতুবি',rejected:'প্রত্যাখ্যাত',requestrecord:'রেকর্ড অনুরোধ',consent_active:'সক্রিয়',consent_pending:'মুলতুবি',consent_expired:'মেয়াদ শেষ',grantconsent:'সম্মতি দিন',scope:'সুযোগ',duration:'সময়কাল',revoke:'প্রত্যাহার',history:'ইতিহাস',audit:'অডিট',success_upload:'আপলোড সফল',error_upload:'আপলোড ব্যর্থ',confirm_delete:'মুছে ফেলার নিশ্চিতকরণ?',yes:'হ্যাঁ',no:'না',file_preview:'প্রিভিউ',logout_confirm:'লগআউট?',delete_confirm:'অ্যাকাউন্ট মুছবেন?',otp_sent:'OTP পাঠানো হয়েছে',notifications_enable:'বিজ্ঞপ্তি সক্ষম করুন',notifications_disable:'বিজ্ঞপ্তি অক্ষম করুন',invalid:'অবৈধ ইনপুট',welcome_dash:'আপনার ডিজিটাল হেলথ লকারে স্বাগতম!',storage:'স্টোরেজ'
+      }
+    };
+    // User session (in-memory storage)
+    let _user = null, _lang = 'en', _role = null;
+
+    // Splash → App Loader
+    function hideSplashShowApp() {
+      const splash = document.getElementById('splash');
+      splash.classList.add('hide');
+      setTimeout(()=>{
+        splash.style.display='none';
+        document.getElementById('app-root').style.display = '';
+        loadLoginOrRedirect();
+      }, 900);
+    }
+    // Show App Main or login accordingly
+    function loadLoginOrRedirect() {
+      // If session user found, redirect to dashboard, else show login
+      if(!_user) {
+        showAuthScreen('login');
+      } else {
+        showDashboard(_user.role);
+      }
+    }
+    // --------- AUTH SCREENS ----------
+    function showAuthScreen(type) {
+      const root = document.getElementById('app-root');
+      const dict = LANGDICT[_lang] || LANGDICT.en;
+      root.innerHTML = `
+        <header class="auth-header flex justify-between items-center px-16 py-16">
+          <div class="flex items-center" style="gap:6px;font-size:1.3rem;font-weight:600;color:var(--primary)">🩺 ${APP_COMPANY.name}</div>
+          <div>${renderLangSelector()}</div>
+        </header>
+        <main class="flex flex-col items-center justify-center" style="min-height:70vh;">
+          <div class="card" style="max-width:370px;width:100%;margin:auto;">
+            <div class="card__body">
+              <h2 class="mb-8" style="text-align:center;color:var(--primary)">${dict[type]}</h2>
+              <form id="authForm">
+                ${type==="signup" ? `<div class="form-group">
+                  <label class="form-label" for="regName">${dict['name']||'Full Name'}</label>
+                  <input class="form-control" id="regName" required autocomplete="name" />
+                </div>` : ''}
+                <div class="form-group">
+                  <label class="form-label" for="authEmail">${dict.email}</label>
+                  <input class="form-control" type="email" id="authEmail" required autocomplete="email" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="authPhone">${dict.phone}</label>
+                  <input class="form-control" type="tel" id="authPhone" required autocomplete="tel" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="authPw">${dict.password}</label>
+                  <input class="form-control" type="password" id="authPw" required autocomplete="current-password" />
+                </div>
+                ${type==="signup" ? `<div class="form-group">
+                  <label class="form-label" for="regRole">${dict['role']}</label>
+                  <select class="form-control" id="regRole">
+                    ${USER_ROLES.map(r=>`<option value="${r.key}">${dict[r.key]||r.label}</option>`).join('')}
+                  </select>
+                </div>` : ''}
+                <div class="form-group flex justify-between" style="align-items:center;">
+                  <label style="font-weight:400;font-size:13px;"><input type="checkbox" id="rememberMe" /> ${dict.remember}</label>
+                  <a class="btn--outline" style="font-size:13px;" href="#" onclick="showForgotPw()">${dict.forgot}</a>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width mt-8">${dict[type]}</button>
+              </form>
+              <div class="flex gap-8 mt-8" style="justify-content:center;">
+                <a class="btn btn--outline" href="#" onclick="socialLogin('google')">${dict.google}</a>
+                <a class="btn btn--outline" href="#" onclick="socialLogin('otp')">${dict.otp}</a>
+              </div>
+              <div class="mt-8" style="text-align:center;font-size:13px;">
+                ${type==="login"? dict.signup+`? <a href="#" onclick="showAuthScreen('signup')">${dict.signup}</a>`: dict.login+`? <a href="#" onclick="showAuthScreen('login')">${dict.login}</a>`}
+              </div>
+            </div>
+          </div>
+        </main>
+      `;
+      document.getElementById('authForm').onsubmit = function(e) {
+        e.preventDefault();
+        if(type==='signup') doSignup(); else doLogin();
+      };
+    }
+
+    function showForgotPw() {
+      alert('Forgot password: Password reset simulation.');
+    }
+    function socialLogin(type) {
+      if(type==='google') {
+        setTimeout(()=>{
+          // Simulate Google social login
+          _user = {...SAMPLE_PATIENTS[0]};
+          _user.role = 'patient';
+          showDashboard(_user.role);
+        }, 800);
+      } else if(type==='otp') {
+        alert(LANGDICT[_lang].otp_sent || 'OTP sent to phone');
+        setTimeout(()=>{
+          _user = {...SAMPLE_PATIENTS[0]};
+          _user.role = 'patient';
+          showDashboard(_user.role);
+        }, 1100);
+      }
+    }
+    function doSignup() {
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('authEmail').value.trim();
+      const phone = document.getElementById('authPhone').value.trim();
+      const pw = document.getElementById('authPw').value;
+      const role = document.getElementById('regRole').value;
+      if(!name || !email || !phone || !pw) return alert(LANGDICT[_lang].invalid||'Invalid input');
+      // Simulate API call
+      setTimeout(()=>{
+        _user = { id: 'U'+(Math.random()*99999).toFixed(0), name, email, phone, role, avatar:'🧑' };
+        showDashboard(role);
+      }, 900);
+    }
+    function doLogin() {
+      const email = document.getElementById('authEmail').value.trim();
+      const phone = document.getElementById('authPhone').value.trim();
+      const pw = document.getElementById('authPw').value;
+      // Simulate login (demo: always succeed)
+      setTimeout(()=>{
+        _user = SAMPLE_PATIENTS.find(u=>u.email===email) || {...SAMPLE_PROVIDERS[0]};
+        if(!_user) {
+          alert(LANGDICT[_lang].invalid||'Invalid input');
+          return;
+        }
+        showDashboard(_user.role);
+      }, 950);
+    }
+
+    // -------- LANGUAGE SELECTOR ---------
+    function renderLangSelector() {
+      return `<select onchange="selectLang(this.value)" class="form-control" style="width:auto;display:inline-block;min-width:92px;">
+        ${APP_LANGS.map(l=>`<option value="${l.code}"${l.code===_lang?' selected':''}>${l.name}</option>`).join('')}
+      </select>`;
+    }
+    function selectLang(lcode) {
+      _lang = lcode;
+      // Reload view (depends on state)
+      if(_user) showDashboard(_user.role); else showAuthScreen('login');
+    }
+
+    // --------- DASHBOARD ROUTER ---------
+    function showDashboard(role) {
+      if(!['patient','provider','insurance'].includes(role)) role='patient';
+      if(role==='patient') showPatientDashboard();
+      else if(role==='provider') showProviderDashboard();
+      else showInsuranceDashboard();
+    }
+    // --------- PATIENT DASH ---------
+    function showPatientDashboard() {
+      const dict = LANGDICT[_lang]||LANGDICT['en'];
+      document.getElementById('app-root').innerHTML = `
+        ${renderDashHeader()}
+        <main class="container px-16 py-16">
+          <h2 style="margin-bottom:20px;">${dict.welcome}, ${_user?.name||''}!</h2>
+          <section class="flex gap-8 mb-8">
+            <div class="card" style="flex:1;min-width:160px;">
+              <div class="card__body flex flex-col items-center">
+                <span style="font-size:2rem;color:var(--secondary);">📤</span>
+                <span>${dict.upload}</span>
+              </div>
+            </div>
+            <div class="card" style="flex:1;min-width:160px;">
+              <div class="card__body flex flex-col items-center">
+                <span style="font-size:2rem;color:var(--primary);">🤝</span>
+                <span>${dict.share}</span>
+              </div>
+            </div>
+            <div class="card" style="flex:1;min-width:160px;">
+              <div class="card__body flex flex-col items-center">
+                <span style="font-size:2rem;color:#f39c12;">👁️</span>
+                <span>${dict.viewshared}</span>
+              </div>
+            </div>
+            <div class="card" style="flex:1;min-width:160px;">
+              <div class="card__body flex flex-col items-center">
+                <span style="font-size:2rem;color:#b4413c;">📝</span>
+                <span>${dict.consent}</span>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3 style="margin-bottom:8px;">${dict.activity}</h3>
+            <ul style="padding-left:18px;margin-bottom:18px;color:var(--color-text-secondary);">
+              <li>2025-10-20: Uploaded <b>Prescription - Diabetes</b></li>
+              <li>2025-10-15: Uploaded <b>Blood Test Report - Oct 2025</b></li>
+            </ul>
+          </section>
+          <section class="card" style="margin-bottom:32px;">
+            <div class="card__body">
+              <div class="flex justify-between items-center mb-8">
+                <h3 style="margin:0;">${dict.folders}</h3>
+                <button class="btn btn--outline btn--sm" onclick="addFolder()">+ ${dict.addfolder}</button>
+              </div>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                <div class="card" style="flex:1;min-width:160px;"><div class="card__body">Lab Tests</div></div>
+                <div class="card" style="flex:1;min-width:160px;"><div class="card__body">Prescriptions</div></div>
+              </div>
+              <div style="margin-top:16px;"><b>${dict.storage}:</b> 8 MB / 50 MB</div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card__header flex justify-between items-center">
+              <span>${dict.records}</span>
+              <button class="btn btn--primary btn--sm" onclick="triggerUpload()">${dict.upload}</button>
+            </div>
+            <div class="card__body">
+              <table class="table" style="width:100%;font-size:15px;">
+                <thead><tr style="background:var(--color-bg-1);"><th>${dict.records}</th><th>${dict.type}</th><th>${dict.date}</th><th>${dict.shared}</th></tr></thead>
+                <tbody>
+                  ${SAMPLE_RECORDS.map(r=>`<tr>
+                  <td>${r.name}</td>
+                  <td>${r.type}</td>
+                  <td>${r.date}</td>
+                  <td>${r.shared ? '✅' : '❌'}</td>
+                  </tr>`).join('')}
+                </tbody>
+              </table>
+              <div class="status status--success mt-8" style="margin-top:18px;">${dict.privacy}</div>
+            </div>
+          </section>
+        </main>
+      `;
+    }
+    function addFolder() {
+      alert('Add folder - implement folder dialog in full version.');
+    }
+    function triggerUpload() {
+      alert('Upload - implement in full version.');
+    }
+    // --------- PROVIDER DASH ---------
+    function showProviderDashboard() {
+      const dict = LANGDICT[_lang]||LANGDICT.en;
+      document.getElementById('app-root').innerHTML = `
+        ${renderDashHeader()}
+        <main class="container px-16 py-16">
+          <h2 style="margin-bottom:20px;">${dict.provider} ${dict.dashboard}</h2>
+          <section class="card mb-8">
+            <div class="card__header">
+              <h3 style="margin:0;">${dict.patient} ${dict.records} - ${dict.consent_active}</h3>
+            </div>
+            <div class="card__body">
+              <table class="table" style="width:100%;">
+                <thead><tr style="background:var(--color-bg-2);"><th>${dict.patient}</th><th>${dict.status}</th><th>${dict.action}</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>${SAMPLE_PATIENTS[0].avatar} ${SAMPLE_PATIENTS[0].name}</td>
+                    <td><span class="status status--success">${dict.consent_active}</span></td>
+                    <td><button class="btn btn--outline btn--sm">${dict.viewshared}</button></td>
+                  </tr>
+                  <tr>
+                    <td>👨 Amit Sharma</td>
+                    <td><span class="status" style="background:var(--color-bg-2);color:var(--warning);border:1px solid var(--warning);">${dict.pending}</span></td>
+                    <td><button class="btn btn--outline btn--sm">${dict.request}</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="card">
+            <div class="card__header">
+              <h3 style="margin:0;">${dict.requestrecord}</h3>
+            </div>
+            <div class="card__body">
+              <form>
+                <div class="form-group">
+                  <label class="form-label">${dict.patient} ${dict.email}</label>
+                  <input class="form-control" type="email" placeholder="patient@email.com" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">${dict.type}</label>
+                  <select class="form-control">
+                    <option>Lab Tests</option>
+                    <option>Prescriptions</option>
+                    <option>Radiology</option>
+                    <option>All Records</option>
+                  </select>
+                </div>
+                <button type="button" class="btn btn--primary">${dict.request} ${dict.records}</button>
+              </form>
+            </div>
+          </section>
+        </main>
+      `;
+    }
+    // --------- INSURANCE DASH ---------
+    function showInsuranceDashboard() {
+      const dict = LANGDICT[_lang]||LANGDICT.en;
+      document.getElementById('app-root').innerHTML = `
+        ${renderDashHeader()}
+        <main class="container px-16 py-16">
+          <h2 style="margin-bottom:20px;">${dict.insurance} ${dict.dashboard}</h2>
+          <section class="flex gap-8 mb-8">
+            <div class="card" style="flex:1;">
+              <div class="card__body flex flex-col items-center">
+                <span style="font-size:2.5rem;color:var(--success);">✅</span>
+                <h3 style="margin:8px 0 4px;">42</h3>
+                <span style="color:var(--color-text-secondary);">${dict.approved}</span>
+              </div>
+            </div>
+            <div class="card" style="flex:1;">
+              <div class="card__body flex flex-col items-center">
+                <span style="font-size:2.5rem;color:var(--warning);">⏳</span>
+                <h3 style="margin:8px 0 4px;">18</h3>
+                <span style="color:var(--color-text-secondary);">${dict.pending}</span>
+              </div>
+            </div>
+            <div class="card" style="flex:1;">
+              <div class="card__body flex flex-col items-center">
+                <span style="font-size:2.5rem;color:var(--danger);">❌</span>
+                <h3 style="margin:8px 0 4px;">5</h3>
+                <span style="color:var(--color-text-secondary);">${dict.rejected}</span>
+              </div>
+            </div>
+          </section>
+          <section class="card mb-8">
+            <div class="card__header">
+              <h3 style="margin:0;">${dict.pending} ${dict.request}s</h3>
+            </div>
+            <div class="card__body">
+              <table class="table" style="width:100%;">
+                <thead><tr style="background:var(--color-bg-3);"><th>${dict.patient}</th><th>${dict.type}</th><th>${dict.date}</th><th>${dict.status}</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td>${SAMPLE_PATIENTS[0].avatar} ${SAMPLE_PATIENTS[0].name}</td>
+                    <td>Prescription</td>
+                    <td>2025-11-15</td>
+                    <td><span class="status" style="background:var(--color-bg-2);color:var(--warning);border:1px solid var(--warning);">${dict.pending}</span></td>
+                  </tr>
+                  <tr>
+                    <td>👩 Priya Patel</td>
+                    <td>Lab Tests</td>
+                    <td>2025-11-12</td>
+                    <td><span class="status status--success">${dict.approved}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="card">
+            <div class="card__header">
+              <h3 style="margin:0;">${dict.requestrecord}</h3>
+            </div>
+            <div class="card__body">
+              <form>
+                <div class="form-group">
+                  <label class="form-label">${dict.patient} ${dict.email}</label>
+                  <input class="form-control" type="email" placeholder="patient@email.com" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Claim ID</label>
+                  <input class="form-control" placeholder="CLM-2025-XXXX" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">${dict.duration}</label>
+                  <select class="form-control">
+                    <option>30 days</option>
+                    <option>90 days</option>
+                    <option>1 year</option>
+                  </select>
+                </div>
+                <button type="button" class="btn btn--primary">${dict.request} ${dict.records}</button>
+              </form>
+            </div>
+          </section>
+        </main>
+      `;
+    }
+    // --------- DASHBOARD HEADER ---------
+    function renderDashHeader() {
+      const dict = LANGDICT[_lang]||LANGDICT.en;
+      return `<header class="flex justify-between items-center px-16 py-16" style="background:var(--color-surface);position:sticky;top:0;z-index:4;border-bottom:1px solid var(--color-border);">
+        <div class="flex items-center gap-8">
+          <span style="font-size:1.2em;color:var(--primary);margin-right:4px;">🩺</span> <b>${APP_COMPANY.name}</b>
+          <span class="status status--success ml-8" style="margin-left:16px;font-size:12px;">SSL &#128274;</span>
+        </div>
+        <div class="flex items-center gap-8">
+          ${renderLangSelector()}
+          <a href="#" class="btn btn--outline btn--sm" onclick="showUserProfile()">${(_user && _user.avatar) ? _user.avatar+'&nbsp;' : ''}${_user && _user.name}</a>
+          <a href="#" class="btn btn--outline btn--sm" onclick="logout()">${dict.logout}</a>
+        </div>
+      </header>`;
+    }
+    // --------- PROFILE/USER MGMT ---------
+    function showUserProfile() {
+      const dict = LANGDICT[_lang]||LANGDICT.en;
+      document.getElementById('app-root').innerHTML = `
+        ${renderDashHeader()}<main class="container px-16 py-16" style="max-width:430px;">
+          <div class="card"><div class="card__body">
+            <div class="flex items-center gap-8 mb-8">
+              <span style="font-size:2.8em;">${_user.avatar||'👤'}</span>
+              <div>
+                <b>${_user.name}</b><br>
+                <span style="color:var(--color-text-secondary);font-size:14px">${_user.role}</span>
+              </div>
+            </div>
+            <form id="profileForm">
+              <div class="form-group">
+                <label>${dict.email}</label>
+                <input class="form-control" value="${_user.email}" disabled />
+              </div>
+              <div class="form-group">
+                <label>${dict.phone}</label>
+                <input class="form-control" value="${_user.phone||''}" />
+              </div>
+              <div class="form-group flex gap-8 items-center">
+                <label>${dict.twofa}</label>
+                <input type="checkbox" />
+              </div>
+              <button class="btn btn--primary btn--full-width">${dict.save}</button>
+            </form>
+            <button class="btn btn--outline btn--full-width mt-8" onclick="logout()">${dict.logout}</button>
+            <button class="btn btn--outline btn--full-width mt-8" style="color:var(--danger);border-color:var(--danger)" onclick="confirmDeleteAccount()">${dict.delete}</button>
+          </div></div>
+        </main>
+      `;
+    }
+    function confirmDeleteAccount() {
+      if(confirm(LANGDICT[_lang].delete_confirm||'Delete account?')) {
+        _user = null;
+        showAuthScreen('login');
+      }
+    }
+    function logout() {
+      if(confirm(LANGDICT[_lang].logout_confirm||'Logout?')) {
+        _user = null;
+        showAuthScreen('login');
+      }
+    }
+    // ------------- INIT: Run splash, then load next screen ------------
+    setTimeout(hideSplashShowApp, 2300 + Math.random()*1200);
+  </script>
+</body>
+</html>
