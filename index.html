@@ -685,12 +685,35 @@
       border-top: 1px solid var(--color-border);
       color: var(--color-text-secondary);
     }
+    .lang-btn {
+      padding: 6px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      background: var(--color-bg-secondary);
+      color: var(--color-text);
+    }
+    .lang-btn:hover {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+    }
+    .lang-btn-active {
+      background: var(--color-primary) !important;
+      color: white !important;
+      border-color: var(--color-primary) !important;
+    }
     @media (max-width: 768px) {
       .hero h1 { font-size: 2rem; }
       .hero p { font-size: 1.1rem; }
       .section-title { font-size: 1.8rem; }
       .nav-menu { display: none; }
       .header-actions { flex-wrap: wrap; }
+      .lang-btn { padding: 5px 10px; font-size: 12px; }
     }
   </style>
 </head>
@@ -1752,6 +1775,9 @@
             </div>
             <div class="footer-bottom">
               <p>${content.footer_copyright}</p>
+              <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--color-border);text-align:center;">
+                ${renderFooterLangSelector()}
+              </div>
             </div>
           </footer>
         </div>
@@ -1895,6 +1921,31 @@
         ${APP_LANGS.map(l=>`<option value="${l.code}"${l.code===_lang?' selected':''}>${l.name}</option>`).join('')}
       </select>`;
     }
+    
+    // Footer language selector - shows all languages with flags
+    function renderFooterLangSelector() {
+      const langFlags = {
+        'en': '🇬🇧',
+        'hi': '🇮🇳',
+        'ta': '🇮🇳',
+        'te': '🇮🇳',
+        'mr': '🇮🇳',
+        'bn': '🇮🇳',
+        'ml': '🇮🇳',
+        'kn': '🇮🇳'
+      };
+      
+      return `<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;">
+        <span style="font-size:12px;color:var(--color-text-secondary);margin-right:8px;font-weight:500;">Available Languages:</span>
+        ${APP_LANGS.map(l => `
+          <button onclick="selectLang('${l.code}')" class="lang-btn ${l.code === _lang ? 'lang-btn-active' : ''}" 
+            style="${l.code === _lang ? 'background:var(--color-primary);color:white;' : 'background:var(--color-bg-secondary);color:var(--color-text);'}">
+            ${langFlags[l.code]} ${l.name}
+          </button>
+        `).join('')}
+      </div>`;
+    }
+    
     function selectLang(lcode) {
       _lang = lcode;
       // Reload view (depends on state)
