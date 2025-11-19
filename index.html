@@ -1219,7 +1219,8 @@
         google:'Continue with Google',otp:'OTP via Phone',remember:'Remember me',
         role:'Role',patient:'Patient',provider:'Provider',insurance:'Insurance',
         welcome:'Welcome',logout:'Logout',language:'Language',dashboard:'Dashboard',
-        upload:'Upload Records',share:'Share Records',viewshared:'View Shared',consent:'Manage Consent',activity:'Recent Activity',folders:'Folders',addfolder:'Add Folder',profile:'Profile',settings:'Settings',records:'Records',type:'Type',date:'Date',shared:'Shared?',action:'Action',privacy:'Your data is encrypted',ssl:'SSL Secured',terms:'Terms &amp; Conditions',privacy_policy:'Privacy Policy',data_protect:'Data Protection',delete:'Delete Account',twofa:'2FA',notifications:'Notifications',changepw:'Change Password',save:'Save',edit:'Edit',back:'Back',request:'Request',status:'Status',approved:'Approved',pending:'Pending',rejected:'Rejected',requestrecord:'Request Records',consent_active:'Active',consent_pending:'Pending',consent_expired:'Expired',grantconsent:'Grant Consent',scope:'Scope',duration:'Duration',revoke:'Revoke',history:'Consent History',audit:'Audit Log',success_upload:'Upload Successful',error_upload:'Upload Failed',confirm_delete:'Confirm Delete?',yes:'Yes',no:'No',file_preview:'Preview',logout_confirm:'Logout?',delete_confirm:'Delete account? This can\'t be undone.',otp_sent:'OTP sent to phone',notifications_enable:'Enable Notifications',notifications_disable:'Disable Notifications',invalid:'Invalid input',welcome_dash:'Welcome to your Digital Health Locker!',storage:'Storage Used'
+        upload:'Upload Records',share:'Share Records',viewshared:'View Shared',consent:'Manage Consent',activity:'Recent Activity',folders:'Folders',addfolder:'Add Folder',profile:'Profile',settings:'Settings',records:'Records',type:'Type',date:'Date',shared:'Shared?',action:'Action',privacy:'Your data is encrypted',ssl:'SSL Secured',terms:'Terms &amp; Conditions',privacy_policy:'Privacy Policy',data_protect:'Data Protection',delete:'Delete Account',twofa:'2FA',notifications:'Notifications',changepw:'Change Password',save:'Save',edit:'Edit',back:'Back',request:'Request',status:'Status',approved:'Approved',pending:'Pending',rejected:'Rejected',requestrecord:'Request Records',consent_active:'Active',consent_pending:'Pending',consent_expired:'Expired',grantconsent:'Grant Consent',scope:'Scope',duration:'Duration',revoke:'Revoke',history:'Consent History',audit:'Audit Log',success_upload:'Upload Successful',error_upload:'Upload Failed',confirm_delete:'Confirm Delete?',yes:'Yes',no:'No',file_preview:'Preview',logout_confirm:'Logout?',delete_confirm:'Delete account? This can\'t be undone.',otp_sent:'OTP sent to phone',notifications_enable:'Enable Notifications',notifications_disable:'Disable Notifications',invalid:'Invalid input',welcome_dash:'Welcome to your Digital Health Locker!',storage:'Storage Used',
+        chatbot_title:'Health Assistant',chatbot_placeholder:'Tell me your symptoms...',chatbot_send:'Send',chatbot_severity_low:'Low severity - Monitor and rest',chatbot_severity_moderate:'Moderate severity - Please contact a healthcare professional',chatbot_severity_high:'High severity - Please contact emergency services immediately',chatbot_emergency:'🚨 EMERGENCY',chatbot_professional:'👨‍⚕️ Recommended: Consult Healthcare Professional',chatbot_monitor:'✅ Monitor your symptoms'
       },
       hi:{
         login:'लॉगिन',signup:'रजिस्ट्रेशन',email:'ईमेल',phone:'फोन',password:'पासवर्ड',
@@ -1260,6 +1261,51 @@
     };
     // User session (in-memory storage)
     let _user = null, _lang = 'en', _role = null;
+    
+    // ========== LOCALSTORAGE MANAGEMENT ==========
+    const DB = {
+      // Save user data
+      saveUser(user) {
+        localStorage.setItem('user_' + user.id, JSON.stringify(user));
+        localStorage.setItem('users_list', JSON.stringify([...(this.getAllUsers() || []), user].filter((v, i, a) => a.findIndex(t => t.id === v.id) === i)));
+      },
+      
+      // Get user by ID
+      getUser(id) {
+        const data = localStorage.getItem('user_' + id);
+        return data ? JSON.parse(data) : null;
+      },
+      
+      // Get all users
+      getAllUsers() {
+        const list = localStorage.getItem('users_list');
+        return list ? JSON.parse(list) : [];
+      },
+      
+      // Save health record
+      saveRecord(userId, record) {
+        const records = this.getUserRecords(userId) || [];
+        records.push({...record, id: record.id || 'R' + Date.now()});
+        localStorage.setItem('records_' + userId, JSON.stringify(records));
+      },
+      
+      // Get user's health records
+      getUserRecords(userId) {
+        const data = localStorage.getItem('records_' + userId);
+        return data ? JSON.parse(data) : [];
+      },
+      
+      // Update user login (authenticate)
+      authenticateUser(email, password) {
+        const users = this.getAllUsers();
+        return users.find(u => u.email === email && u.password === password);
+      },
+      
+      // Clear all data (for testing)
+      clearAll() {
+        localStorage.clear();
+      }
+    };
 
     // Initialize app - show homepage or dashboard
     function initApp() {
@@ -1632,24 +1678,42 @@
       const pw = document.getElementById('authPw').value;
       const role = document.getElementById('regRole').value;
       if(!name || !email || !phone || !pw) return alert(LANGDICT[_lang].invalid||'Invalid input');
-      // Simulate API call
+      
+      // Check if user already exists
+      if(DB.getAllUsers().find(u => u.email === email)) {
+        return alert('Email already registered!');
+      }
+      
+      // Save user to localStorage
+      const newUser = { 
+        id: 'U'+(Math.random()*99999999).toFixed(0), 
+        name, email, phone, password: pw, role, avatar:'🧑',
+        registeredAt: new Date().toISOString()
+      };
+      DB.saveUser(newUser);
+      
+      // Auto-login
       setTimeout(()=>{
-        _user = { id: 'U'+(Math.random()*99999).toFixed(0), name, email, phone, role, avatar:'🧑' };
+        _user = newUser;
         showDashboard(role);
       }, 900);
     }
+    
     function doLogin() {
       const email = document.getElementById('authEmail').value.trim();
-      const phone = document.getElementById('authPhone').value.trim();
       const pw = document.getElementById('authPw').value;
-      // Simulate login (demo: always succeed)
+      if(!email || !pw) return alert(LANGDICT[_lang].invalid||'Invalid input');
+      
+      // Authenticate from localStorage
+      const user = DB.authenticateUser(email, pw);
+      if(!user) {
+        return alert('Invalid email or password');
+      }
+      
+      // Login successful
       setTimeout(()=>{
-        _user = SAMPLE_PATIENTS.find(u=>u.email===email) || {...SAMPLE_PROVIDERS[0]};
-        if(!_user) {
-          alert(LANGDICT[_lang].invalid||'Invalid input');
-          return;
-        }
-        showDashboard(_user.role);
+        _user = user;
+        showDashboard(user.role);
       }, 950);
     }
 
@@ -1735,25 +1799,63 @@
               <table class="table" style="width:100%;font-size:15px;">
                 <thead><tr style="background:var(--color-bg-1);"><th>${dict.records}</th><th>${dict.type}</th><th>${dict.date}</th><th>${dict.shared}</th></tr></thead>
                 <tbody>
-                  ${SAMPLE_RECORDS.map(r=>`<tr>
-                  <td>${r.name}</td>
-                  <td>${r.type}</td>
-                  <td>${r.date}</td>
-                  <td>${r.shared ? '✅' : '❌'}</td>
-                  </tr>`).join('')}
+                  ${(() => {
+                    const userRecords = DB.getUserRecords(_user.id) || [];
+                    if(userRecords.length === 0) return '<tr><td colspan="4" style="text-align:center;color:var(--color-text-secondary);">No records yet. Upload your first health record!</td></tr>';
+                    return userRecords.map(r=>`<tr>
+                    <td>${r.name}</td>
+                    <td>${r.type}</td>
+                    <td>${r.date}</td>
+                    <td>${r.shared ? '✅' : '❌'}</td>
+                    </tr>`).join('');
+                  })()}
                 </tbody>
               </table>
               <div class="status status--success mt-8" style="margin-top:18px;">${dict.privacy}</div>
             </div>
           </section>
+          
+          <!-- Chatbot Button -->
+          <div style="position:fixed;bottom:24px;right:24px;z-index:999;">
+            <button onclick="openChatbot()" class="btn btn--primary" style="border-radius:50%;width:56px;height:56px;padding:0;font-size:24px;box-shadow:0 4px 12px rgba(0,102,204,0.3);">💬</button>
+          </div>
         </main>
+        
+        <!-- Chatbot Modal -->
+        <div id="chatbot-modal" style="display:none;position:fixed;bottom:100px;right:24px;width:340px;height:500px;background:white;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.15);z-index:1000;flex-direction:column;">
+          <div style="background:linear-gradient(135deg, #0066cc 0%, #20b2aa 100%);color:white;padding:16px;border-radius:12px 12px 0 0;display:flex;justify-content:space-between;align-items:center;">
+            <h3 style="margin:0;font-size:16px;">🏥 Health Assistant</h3>
+            <button onclick="closeChatbot()" style="background:none;border:none;color:white;font-size:20px;cursor:pointer;">×</button>
+          </div>
+          <div id="chatbot-messages" style="flex:1;overflow-y:auto;padding:16px;background:#f9f9f9;"></div>
+          <div style="padding:12px;border-top:1px solid #eee;display:flex;gap:8px;">
+            <input id="symptom-input" type="text" placeholder="Tell your symptoms..." class="form-control" style="flex:1;margin:0;border-radius:6px;" />
+            <button onclick="sendChatMessage()" class="btn btn--primary" style="width:auto;padding:8px 12px;">Send</button>
+          </div>
+        </div>
       `;
     }
     function addFolder() {
       alert('Add folder - implement folder dialog in full version.');
     }
     function triggerUpload() {
-      alert('Upload - implement in full version.');
+      const recordName = prompt('Enter health record name (e.g., Blood Test, X-Ray, Prescription):');
+      if(!recordName) return;
+      
+      const recordType = prompt('Enter record type (Lab/Imaging/Prescription/Other):') || 'Other';
+      
+      const newRecord = {
+        id: 'R' + Date.now(),
+        name: recordName,
+        type: recordType,
+        date: new Date().toISOString().split('T')[0],
+        folder: 'General',
+        shared: false
+      };
+      
+      DB.saveRecord(_user.id, newRecord);
+      alert('Record saved successfully!');
+      showPatientDashboard(); // Refresh to show new record
     }
     // --------- PROVIDER DASH ---------
     function showProviderDashboard() {
@@ -1954,6 +2056,89 @@
         showAuthScreen('login');
       }
     }
+    
+    // -------- CHATBOT FUNCTIONS ---------
+    const SYMPTOM_KEYWORDS = {
+      emergency: ['chest pain', 'difficulty breathing', 'loss of consciousness', 'severe bleeding', 'choking', 'छाती का दर्द', 'सांस लेने में कठिनाई'],
+      high: ['severe headache', 'persistent vomiting', 'severe fever', 'severe abdominal pain', 'sudden vision loss', 'तीव्र बुखार', 'गंभीर सिरदर्द'],
+      moderate: ['mild fever', 'cough', 'sore throat', 'diarrhea', 'dizziness', 'खांसी', 'गले में खराश'],
+      low: ['fatigue', 'mild headache', 'runny nose', 'minor aches', 'थकान', 'हल्का सिरदर्द']
+    };
+    
+    function analyzeSeverity(text) {
+      text = text.toLowerCase();
+      if(SYMPTOM_KEYWORDS.emergency.some(k => text.includes(k))) return 'emergency';
+      if(SYMPTOM_KEYWORDS.high.some(k => text.includes(k))) return 'high';
+      if(SYMPTOM_KEYWORDS.moderate.some(k => text.includes(k))) return 'moderate';
+      return 'low';
+    }
+    
+    function openChatbot() {
+      document.getElementById('chatbot-modal').style.display = 'flex';
+      document.getElementById('symptom-input').focus();
+      if(!document.getElementById('chatbot-messages').innerHTML.includes('Welcome')) {
+        document.getElementById('chatbot-messages').innerHTML = `
+          <div style="padding:12px;background:white;border-radius:6px;margin-bottom:8px;">
+            <div style="color:var(--primary);font-weight:600;">🏥 Health Assistant</div>
+            <div style="color:var(--color-text-secondary);font-size:14px;margin-top:4px;">Welcome! Describe your symptoms and I'll help assess your condition.</div>
+          </div>
+        `;
+      }
+    }
+    
+    function closeChatbot() {
+      document.getElementById('chatbot-modal').style.display = 'none';
+    }
+    
+    function sendChatMessage() {
+      const input = document.getElementById('symptom-input');
+      const message = input.value.trim();
+      if(!message) return;
+      
+      const messagesDiv = document.getElementById('chatbot-messages');
+      
+      // User message
+      messagesDiv.innerHTML += `
+        <div style="padding:8px 12px;background:#e3f2fd;border-radius:6px;margin-bottom:8px;text-align:right;">
+          <div style="font-size:14px;">${message}</div>
+        </div>
+      `;
+      
+      // Analyze severity
+      const severity = analyzeSeverity(message);
+      
+      let response = '';
+      let icon = '';
+      
+      if(severity === 'emergency') {
+        response = '🚨 EMERGENCY ALERT: Your symptoms suggest a medical emergency. Please contact emergency services (ambulance) immediately or go to the nearest hospital emergency room.';
+        icon = '🚨';
+      } else if(severity === 'high') {
+        response = '👨‍⚕️ RECOMMENDED: Please contact a healthcare professional urgently. You should schedule an appointment with your doctor today or visit an urgent care center.';
+        icon = '👨‍⚕️';
+      } else if(severity === 'moderate') {
+        response = '📋 MONITOR: Your symptoms appear moderate. Contact your healthcare provider for guidance. Rest well and monitor your condition closely.';
+        icon = '📋';
+      } else {
+        response = '✅ SELF-CARE: Your symptoms appear mild. Rest, stay hydrated, and monitor your condition. Seek professional help if symptoms persist or worsen.';
+        icon = '✅';
+      }
+      
+      // Bot response
+      setTimeout(() => {
+        messagesDiv.innerHTML += `
+          <div style="padding:12px;background:white;border-radius:6px;margin-bottom:8px;border-left:4px solid var(--primary);">
+            <div style="color:var(--primary);font-weight:600;margin-bottom:4px;">${icon} Assessment</div>
+            <div style="font-size:14px;color:var(--color-text-secondary);">${response}</div>
+          </div>
+        `;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }, 500);
+      
+      input.value = '';
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+    
     // ------------- INIT: Run splash, then load homepage or dashboard -----------
     setTimeout(hideSplashShowApp, 2300 + Math.random()*1200);
   </script>
