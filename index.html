@@ -1539,7 +1539,6 @@
                 <a href="#footer">${content.nav_contact}</a>
               </nav>
               <div class="header-actions">
-                ${renderLangSelector()}
                 <button class="btn btn--outline btn--sm" onclick="showAuthScreen('login')">${LANGDICT[_lang].login}</button>
                 <button class="btn btn--primary btn--sm" onclick="showAuthScreen('signup')">${LANGDICT[_lang].signup}</button>
               </div>
@@ -1794,7 +1793,6 @@
       root.innerHTML = `
         <header class="auth-header flex justify-between items-center px-16 py-16">
           <a href="#" onclick="showHomepage()" style="text-decoration:none;cursor:pointer;" class="logo"><img src="logo.png" alt="AarogyaSathi"/> ${APP_COMPANY.name}</a>
-          <div>${renderLangSelector()}</div>
         </header>
         <main class="flex flex-col items-center justify-center" style="min-height:70vh;">
           <div class="card" style="max-width:370px;width:100%;margin:auto;">
@@ -1924,23 +1922,12 @@
     
     // Footer language selector - shows all languages with flags
     function renderFooterLangSelector() {
-      const langFlags = {
-        'en': '🇬🇧',
-        'hi': '🇮🇳',
-        'ta': '🇮🇳',
-        'te': '🇮🇳',
-        'mr': '🇮🇳',
-        'bn': '🇮🇳',
-        'ml': '🇮🇳',
-        'kn': '🇮🇳'
-      };
-      
       return `<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;">
-        <span style="font-size:12px;color:var(--color-text-secondary);margin-right:8px;font-weight:500;">Available Languages:</span>
+        <span style="font-size:12px;color:var(--color-text-secondary);margin-right:8px;font-weight:500;">Select Language:</span>
         ${APP_LANGS.map(l => `
           <button onclick="selectLang('${l.code}')" class="lang-btn ${l.code === _lang ? 'lang-btn-active' : ''}" 
             style="${l.code === _lang ? 'background:var(--color-primary);color:white;' : 'background:var(--color-bg-secondary);color:var(--color-text);'}">
-            ${langFlags[l.code]} ${l.name}
+            ${l.name}
           </button>
         `).join('')}
       </div>`;
@@ -2227,7 +2214,6 @@
           <span class="status status--success" style="font-size:12px;">SSL &#128274;</span>
         </div>
         <div class="flex items-center gap-8">
-          ${renderLangSelector()}
           <a href="#" class="btn btn--outline btn--sm" onclick="showUserProfile()">${(_user && _user.avatar) ? _user.avatar+'&nbsp;' : ''}${_user && _user.name}</a>
           <a href="#" class="btn btn--outline btn--sm" onclick="logout()">${dict.logout}</a>
         </div>
